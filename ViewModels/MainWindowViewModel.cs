@@ -1,12 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
+using QuanLyDaiLy.Models;
+using QuanLyDaiLy.Services;
+using QuanLyDaiLy.Views;
+using Microsoft.Extensions.DependencyInjection;
+using System.Windows;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
+using CommunityToolkit.Mvvm.Input;
+using QuanLyDaiLy.Messages;
+using System.Windows.Input;
 
 namespace QuanLyDaiLy.ViewModels
 {
-    internal class MainWindowViewModel
+    public partial class MainWindowViewModel
     {
     }
 }

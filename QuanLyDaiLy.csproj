@@ -107,6 +107,7 @@
     <Compile Include="Views\ChinhSuaDaiLyWindow.xaml.cs">
       <DependentUpon>ChinhSuaDaiLyWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\CustomAnimation\GridLengthAnimation.cs" />
     <Compile Include="Views\HoSoDaiLyWinDow.xaml.cs">
       <DependentUpon>HoSoDaiLyWinDow.xaml</DependentUpon>
     </Compile>
