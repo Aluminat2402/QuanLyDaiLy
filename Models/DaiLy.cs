@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-
 namespace QuanLyDaiLy.Models
 {
-    public class DaiLy
-    {
-        [Key]
-        public int MaDaiLy { get; set; } = 0;
+   public class DaiLy
+   {
+       [Key]
+       public int MaDaiLy { get; set; } = 0;
 
         [Required(ErrorMessage = "Tên đại lý không được để trống")]
         [StringLength(100, ErrorMessage = "Tên đại lý không được vượt quá 100 ký tự")]
@@ -31,9 +29,7 @@ namespace QuanLyDaiLy.Models
         public long TienNo { get; set; } = 0;
 
         // Navigation properties
-        /*public LoaiDaiLy LoaiDaiLy { get; set; } = null!;
-        public Quan Quan { get; set; } = null!;
-        public ICollection<PhieuThu> DsPhieuThu { get; set; } = [];
-        public ICollection<PhieuXuat> DsPhieuXuat { get; set; } = [];*/
+        public LoaiDaiLy LoaiDaiLy { get; set; } = null;
+        public Quan Quan { get; set; } = null;
     }
 }

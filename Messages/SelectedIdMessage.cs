@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CommunityToolkit.Mvvm.Messaging.Messages;
 
-namespace QuanLyDaiLy.Messages
-{
-    internal class SelectedIdMessage
-    {
-    }
-}
+using CommunityToolkit.Mvvm.Messaging.Messages;
+
+namespace QuanLyDaiLy.Messages;
+
+public class SelectedIdMessage(int id) : ValueChangedMessage<int>(id) { }

@@ -1,12 +1,60 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
+using QuanLyDaiLy.Models;
+using System;
 
 namespace QuanLyDaiLy.Helpers
 {
-    internal class DatabaseSeeder
+    public static class DatabaseSeeder
     {
+        public static void Seed(ModelBuilder modelBuilder)
+        {
+            SeedThamSo(modelBuilder);
+            SeedQuan(modelBuilder);
+            SeedLoaiDaiLy(modelBuilder);
+            SeedDaiLy(modelBuilder);
+        }
+
+        private static void SeedThamSo(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ThamSo>().HasData(
+                new ThamSo { Id = 1, SoLuongDaiLyToiDa = 4, QuyDinhTienThuTienNo = true }
+            );
+        }
+
+        private static void SeedQuan(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Quan>().HasData(
+                new Quan { MaQuan = 1, TenQuan = "Quận 1"}
+                //Tương tự với các quận khác
+            ); 
+        }
+
+        private static void SeedLoaiDaiLy(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<LoaiDaiLy>().HasData(
+                new LoaiDaiLy { MaLoaiDaiLy = 1, TenLoaiDaiLy = "Loại 1", NoToiDa = 60_000 }
+                //Tương tự với các loại đại lý khác
+            );
+        }
+
+        private static void SeedDaiLy(ModelBuilder modelBuilder)
+        {
+            var seedDate = new DateTime(2023, 1, 1);
+            modelBuilder.Entity<DaiLy>().HasData(
+                new
+                {
+                    MaDaiLy = 1,
+                    TenDaiLy = "Minh Phát",
+                    MaLoaiDaiLy = 1,
+                    MaQuan = 1,
+                    DiaChi = "12 Nguyễn Huệ",
+                    DienThoai = "0901234567",
+                    Email = "MinhPhat@gmail.com",
+                    NgayTiepNhan = seedDate.AddMonths(-3),
+                    TienNo = 15000000L
+                }
+                //Tương tự với các đại lý khác
+            ); 
+        }
     }
 }

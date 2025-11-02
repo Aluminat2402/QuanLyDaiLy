@@ -1,12 +1,18 @@
-﻿using System;
+﻿using QuanLyDaiLy.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
+using QuanLyDaiLy.Models;
+
 namespace QuanLyDaiLy.Services
-{
-    internal interface IQuanService
-    {
-    }
+{ 
+ public interface IQuanService
+ {
+     Task<Quan> GetQuanById(int id);
+     Task<IEnumerable<Quan>> GetAllQuan();
+     Task AddQuan(Quan quan);
+     Task UpdateQuan(Quan quan);
+     Task DeleteQuan(int id);
+     Task<int> GenerateAvailableId();
+ }
 }
