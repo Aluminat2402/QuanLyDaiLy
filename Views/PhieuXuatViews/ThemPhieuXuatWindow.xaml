@@ -111,12 +111,12 @@
                             <ComboBox
                                 Grid.Row="1"
                                 ItemsSource="{Binding DaiLies}"
-                                SelectedItem="{Binding SelectedDaiLy}"
+                                SelectedItem="{Binding SelectedDaiLy, Mode=TwoWay}"
                                 Style="{StaticResource StandardComboBoxStyle}">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding TenDaiLy}" />
-                                    </DataTemplate>
+                                    </DataTemplate>                                    
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
                         </Grid>

@@ -13,7 +13,6 @@ namespace QuanLyDaiLy.Helpers
             SeedLoaiDaiLy(modelBuilder);
             SeedDaiLy(modelBuilder);
             SeedPhieuXuat(modelBuilder);
-            SeedChiTietPhieuXuat(modelBuilder);
         }
 
         private static void SeedThamSo(ModelBuilder modelBuilder)
@@ -69,15 +68,5 @@ namespace QuanLyDaiLy.Helpers
                 );
         }
 
-        private static void SeedChiTietPhieuXuat(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<ChiTietPhieuXuat>().HasData(
-                new ChiTietPhieuXuat { MaChiTietPhieuXuat = 1, MaPhieuXuat = 1, MaMatHang = 55, SoLuongXuat = 21, DonGia = 26233, ThanhTien = 550893 },
-                new ChiTietPhieuXuat { MaChiTietPhieuXuat = 2, MaPhieuXuat = 1, MaMatHang = 4, SoLuongXuat = 13, DonGia = 41405, ThanhTien = 538265 },
-                new ChiTietPhieuXuat { MaChiTietPhieuXuat = 3, MaPhieuXuat = 1, MaMatHang = 51, SoLuongXuat = 29, DonGia = 27220, ThanhTien = 789380 },
-                new ChiTietPhieuXuat { MaChiTietPhieuXuat = 4, MaPhieuXuat = 2, MaMatHang = 11, SoLuongXuat = 22, DonGia = 21093, ThanhTien = 464046 },
-                new ChiTietPhieuXuat { MaChiTietPhieuXuat = 5, MaPhieuXuat = 2, MaMatHang = 82, SoLuongXuat = 18, DonGia = 29981, ThanhTien = 539658 }
-                );
-        }
     }
 }

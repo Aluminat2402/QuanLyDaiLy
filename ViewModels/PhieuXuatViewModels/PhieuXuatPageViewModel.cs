@@ -1,9 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using Microsoft.Extensions.DependencyInjection;
 using QuanLyDaiLy.Messages;
 using QuanLyDaiLy.Models;
 using QuanLyDaiLy.Services;
+using QuanLyDaiLy.Views.PhieuXuatViews;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -320,5 +322,22 @@ namespace QuanLyDaiLy.ViewModels.PhieuXuatViewModels
             }
         }
         #endregion
+
+        [RelayCommand]
+        private async Task LoadDataExecuteAsync()
+        {
+            SelectedPhieuXuat = null!;
+            await LoadDataAsync();
+            MessageBox.Show("Tải lại danh sách thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        [RelayCommand]
+        private void AddPhieuXuat()
+        {
+            SelectedPhieuXuat = null!;
+
+            var addPhieuXuatWindow = _serviceProvider.GetRequiredService<ThemPhieuXuatWindow>();
+            addPhieuXuatWindow.Show();
+        }
     }
 }

@@ -63,5 +63,17 @@ namespace QuanLyDaiLy.Repositories
             }
             return totalPages;
         }
+
+        public async Task AddPhieuXuat(PhieuXuat phieuXuat)
+        {
+            _context.DsPhieuXuat.Add(phieuXuat);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<int> GenerateAvailableId()
+        {
+            int maxId = await _context.DsPhieuXuat.MaxAsync(d => d.MaPhieuXuat);
+            return maxId + 1;
+        }
     }
 }

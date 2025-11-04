@@ -14,6 +14,7 @@ public class DataContext(DbContextOptions<DataContext> options) : DbContext(opti
     public DbSet<LoaiDaiLy> DsLoaiDaiLy { get; set; } = null!;
     public DbSet<Quan> DsQuan { get; set; } = null!;    
     public DbSet<ThamSo> DsThamSo { get; set; } = null!;
+    public DbSet<MatHang> DsMatHang { get; set; } = null!;
     public DbSet<PhieuXuat> DsPhieuXuat { get; set; } = null!;
     public DbSet<ChiTietPhieuXuat> DsChiTietPhieuXuat { get; set; } = null!;
 
@@ -42,10 +43,18 @@ public class DataContext(DbContextOptions<DataContext> options) : DbContext(opti
             .HasForeignKey(p => p.MaDaiLy)
             .OnDelete(DeleteBehavior.Cascade);
 
+        // ChiTietPhieuXuat (1:n) <- (1:1) PhieuXuat
         modelBuilder.Entity<ChiTietPhieuXuat>()
             .HasOne(c => c.PhieuXuat)
             .WithMany(p => p.DsChiTietPhieuXuat)
             .HasForeignKey(c => c.MaPhieuXuat)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        // ChiTietPhieuXuat (1:n) <- (1:1) MatHang
+        modelBuilder.Entity<ChiTietPhieuXuat>()
+            .HasOne(c => c.MatHang)
+            .WithMany(m => m.DsChiTietPhieuXuat)
+            .HasForeignKey(c => c.MaMatHang)
             .OnDelete(DeleteBehavior.Cascade);
 
         DatabaseSeeder.Seed(modelBuilder);

@@ -1,16 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using QuanLyDaiLy.ViewModels.PhieuXuatViewModels;   
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace QuanLyDaiLy.Views.PhieuXuatViews
 {
@@ -19,9 +8,10 @@ namespace QuanLyDaiLy.Views.PhieuXuatViews
     /// </summary>
     public partial class ThemPhieuXuatWindow : Window
     {
-        public ThemPhieuXuatWindow()
+        public ThemPhieuXuatWindow(ThemPhieuXuatViewModel vm)
         {
             InitializeComponent();
+            DataContext = vm;
         }
     }
 }
