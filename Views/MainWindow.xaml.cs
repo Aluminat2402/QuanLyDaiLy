@@ -32,11 +32,6 @@ namespace QuanLyDaiLy.Views
             // This ensures sync if navigation happens programmatically
         }
 
-        private void MainContent_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
-        {
-
-        }
-
         private IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
         {
             if (depObj != null)
