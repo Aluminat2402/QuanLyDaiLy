@@ -3,9 +3,10 @@ using QuanLyDaiLy.Configs;
 using QuanLyDaiLy.Data;
 using QuanLyDaiLy.Models;
 using QuanLyDaiLy.Services;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System;
-using System.Collections.Generic;
 
 namespace QuanLyDaiLy.Repositories
 {
@@ -67,6 +68,26 @@ namespace QuanLyDaiLy.Repositories
         {
             int maxId = await _context.DsLoaiDaiLy.MaxAsync(d => d.MaLoaiDaiLy);
             return maxId + 1;
+        }
+
+        public async Task<IEnumerable<LoaiDaiLy>> GetLoaiDaiLyPage(int offset, int size = 20)
+        {
+            return await _context.DsLoaiDaiLy
+                .Include(l => l.DsDaiLy)
+                .Skip(offset * size)
+                .Take(size)
+                .ToListAsync();
+        }
+
+        public async Task<int> GetTotalPages(int size = 20)
+        {
+            int leftover = await _context.DsLoaiDaiLy.CountAsync() % size;
+            int totalPages = await _context.DsLoaiDaiLy.CountAsync() / size;
+            if (leftover > 0)
+            {
+                totalPages++;
+            }
+            return totalPages;
         }
     }
 }

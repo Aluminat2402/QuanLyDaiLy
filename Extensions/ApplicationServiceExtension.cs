@@ -35,6 +35,11 @@ public static class ApplicationServiceExtensions
       services.AddTransient<TraCuuDaiLyViewModel>();
       services.AddTransient<PhieuXuatPageViewModel>();
 
+      services.AddTransient<ViewModels.LoaiDaiLyViewModels.LoaiDaiLyPageViewModel>();
+      services.AddTransient<ViewModels.LoaiDaiLyViewModels.ThemLoaiDaiLyViewModel>();
+      services.AddTransient<ViewModels.LoaiDaiLyViewModels.CapNhatLoaiDaiLyViewModel>();
+      services.AddTransient<ViewModels.LoaiDaiLyViewModels.TraCuuLoaiDaiLyWindowViewModel>();
+
       services.AddSingleton<Views.MainWindow>();
 
       // Register Views
@@ -43,6 +48,11 @@ public static class ApplicationServiceExtensions
       services.AddTransient<ChinhSuaDaiLyWindow>();
       services.AddTransient<TraCuuDaiLyWindow>();
       services.AddTransient<PhieuXuatPage>();
+
+      services.AddTransient<Views.LoaiDaiLyViews.LoaiDaiLyPage>();
+      services.AddTransient<Views.LoaiDaiLyViews.ThemLoaiDaiLyWindow>();
+      services.AddTransient<Views.LoaiDaiLyViews.CapNhatLoaiDaiLyWindow>();
+      services.AddTransient<Views.LoaiDaiLyViews.TraCuuLoaiDaiLyWindow>();
       return services;
   }
 }
