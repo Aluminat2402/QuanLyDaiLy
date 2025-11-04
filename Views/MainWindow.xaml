@@ -414,7 +414,6 @@
                 Panel.ZIndex="1"
                 ContentRendered="MainContent_ContentRendered"
                 IsHitTestVisible="True"
-                Navigated="MainContent_Navigated"
                 NavigationUIVisibility="Hidden" />
         </Grid>
     </Grid>
