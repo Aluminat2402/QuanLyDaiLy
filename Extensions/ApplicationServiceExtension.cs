@@ -1,12 +1,12 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-
-using Microsoft.Extensions.DependencyInjection;
 using QuanLyDaiLy.Configs;
 using QuanLyDaiLy.Helpers;
 using QuanLyDaiLy.Repositories;
 using QuanLyDaiLy.Services;
 using QuanLyDaiLy.ViewModels;
+using QuanLyDaiLy.ViewModels.PhieuXuatViewModels;
 using QuanLyDaiLy.Views;
+using QuanLyDaiLy.Views.PhieuXuatViews;
 using System.Windows.Navigation;
 
 namespace QuanLyDaiLy.Extensions;
@@ -23,7 +23,8 @@ public static class ApplicationServiceExtensions
       services.AddScoped<ILoaiDaiLyService, LoaiDaiLyRepository>();
       services.AddScoped<IQuanService, QuanRepository>();
       services.AddScoped<IThamSoService, ThamSoRepository>();
-  
+      services.AddScoped<IPhieuXuatService, PhieuXuatRepository>();
+
       // Register helpers
       services.AddSingleton<ComboBoxItemConverter>();
 
@@ -32,14 +33,16 @@ public static class ApplicationServiceExtensions
       services.AddTransient<HoSoDaiLyViewModel>();
       services.AddTransient<ChinhSuaDaiLyViewModel>();
       services.AddTransient<TraCuuDaiLyViewModel>();
+      services.AddTransient<PhieuXuatPageViewModel>();
 
       services.AddSingleton<Views.MainWindow>();
 
-        // Register Views
-        services.AddTransient<MainWindow>();
+      // Register Views
+      services.AddTransient<MainWindow>();
       services.AddTransient<HoSoDaiLyWinDow>();
       services.AddTransient<ChinhSuaDaiLyWindow>();
       services.AddTransient<TraCuuDaiLyWindow>();
+      services.AddTransient<PhieuXuatPage>();
       return services;
   }
 }
