@@ -1,7 +1,4 @@
-﻿using QuanLyDaiLy.ViewModels;
-using System.Windows;
-
-using System.Windows;
+﻿using System.Windows;
 using QuanLyDaiLy.ViewModels;
 
 namespace QuanLyDaiLy.Views
