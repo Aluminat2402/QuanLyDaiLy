@@ -1,0 +1,197 @@
+﻿<Page
+    x:Class="QuanLyDaiLy.Views.QuanViews.QuanPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:fa="http://schemas.fontawesome.io/icons/"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="1536"
+    d:DesignWidth="1536"
+    Background="#F7F9FD"
+    mc:Ignorable="d">
+
+    <Border
+        Margin="10"
+        HorizontalAlignment="Stretch"
+        VerticalAlignment="Stretch"
+        Background="White"
+        CornerRadius="10">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="15*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="80*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <TextBlock
+                Grid.Row="0"
+                Style="{StaticResource PageHeaderTextBlockStyle}"
+                Text="Danh sách Quận" />
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width=".5*" />
+                    <ColumnDefinition Width=".5*" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel
+                    Grid.Column="0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+
+                    <Button
+                        Margin="20,0,0,0"
+                        Command="{Binding SearchQuanCommand}"
+                        Style="{StaticResource PrimaryButtonStyle}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:FontAwesome
+                                Margin="0,0,8,0"
+                                VerticalAlignment="Center"
+                                Icon="Search" />
+                            <TextBlock VerticalAlignment="Center" Text="Tra cứu quận" />
+                        </StackPanel>
+                    </Button>
+                    <Button
+                        Width="50"
+                        Margin="10,0,0,0"
+                        Command="{Binding LoadDataCommand}"
+                        Style="{StaticResource PrimaryButtonStyle}">
+                        <fa:FontAwesome VerticalAlignment="Center" Icon="Refresh" />
+                    </Button>
+
+                </StackPanel>
+
+                <StackPanel
+                    Grid.Column="1"
+                    Margin="0,0,20,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+
+                    <Button Command="{Binding AddQuanCommand}" Style="{StaticResource PrimaryButtonStyle}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:FontAwesome
+                                Margin="0,0,8,0"
+                                VerticalAlignment="Center"
+                                Icon="Plus" />
+                            <TextBlock VerticalAlignment="Center" Text="Thêm quận" />
+                        </StackPanel>
+                    </Button>
+
+                    <Button
+                        Margin="10,0,0,0"
+                        Command="{Binding EditQuanCommand}"
+                        Style="{StaticResource PrimaryButtonStyle}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:FontAwesome
+                                Margin="0,0,8,0"
+                                VerticalAlignment="Center"
+                                Icon="Edit" />
+                            <TextBlock VerticalAlignment="Center" Text="Cập nhật quận" />
+                        </StackPanel>
+                    </Button>
+
+                    <Button
+                        Margin="10,0,0,0"
+                        Command="{Binding DeleteQuanCommand}"
+                        Style="{StaticResource DeleteButtonStyle}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:FontAwesome
+                                Margin="0,0,8,0"
+                                VerticalAlignment="Center"
+                                Icon="Trash" />
+                            <TextBlock VerticalAlignment="Center" Text="Xóa quận" />
+                        </StackPanel>
+                    </Button>
+
+                </StackPanel>
+            </Grid>
+
+            <Border
+                Grid.Row="2"
+                Margin="20"
+                Background="#F7F9FD"
+                BorderBrush="#E0E0E0"
+                BorderThickness="1">
+                <DataGrid
+                    ItemsSource="{Binding DanhSachQuan}"
+                    SelectedItem="{Binding SelectedQuan}"
+                    Style="{StaticResource DefaultDataGridStyle}">
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn
+                            Width="*"
+                            Binding="{Binding MaQuan}"
+                            ElementStyle="{StaticResource ColumnTextBlockStyle}"
+                            Header="Mã quận" />
+
+                        <DataGridTextColumn
+                            Width="*"
+                            Binding="{Binding TenQuan}"
+                            ElementStyle="{StaticResource ColumnTextBlockStyle}"
+                            Header="Tên quận" />
+
+                        <DataGridTextColumn
+                            Width="*"
+                            Binding="{Binding DsDaiLy.Count}"
+                            ElementStyle="{StaticResource ColumnTextBlockStyle}"
+                            Header="Số lượng đại lý" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Border>
+
+            <!-- Pagination -->
+            <Border Grid.Row="3" Style="{StaticResource PaginationBorder}">
+                <StackPanel
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Stretch"
+                    Orientation="Horizontal">
+                    <!-- Previous Page Button -->
+                    <Button
+                        Command="{Binding GoToPreviousPageCommand}"
+                        Content="← Trang trước"
+                        Style="{StaticResource BackForwardButtonStyle}" />
+
+                    <Border Width="1" Margin="4,0" Background="#E0E0E0" />
+
+                    <!-- Page Buttons -->
+                    <Button
+                        Command="{Binding PageSelectionCommand}"
+                        CommandParameter="{Binding ButtonParamFirst}"
+                        Content="{Binding ButtonContentFirst}"
+                        Style="{Binding ButtonStyleFirst}" />
+                    <Button
+                        Command="{Binding PageSelectionCommand}"
+                        CommandParameter="{Binding ButtonParamSecond}"
+                        Content="{Binding ButtonContentSecond}"
+                        Style="{Binding ButtonStyleSecond}" />
+                    <Button
+                        Command="{Binding PageSelectionCommand}"
+                        CommandParameter="{Binding ButtonParamThird}"
+                        Content="{Binding ButtonContentThird}"
+                        Style="{Binding ButtonStyleThird}" />
+                    <Button
+                        Command="{Binding PageSelectionCommand}"
+                        CommandParameter="{Binding ButtonParamForth}"
+                        Content="{Binding ButtonContentForth}"
+                        Style="{Binding ButtonStyleForth}" />
+                    <Button
+                        Command="{Binding PageSelectionCommand}"
+                        CommandParameter="{Binding ButtonParamFith}"
+                        Content="{Binding ButtonContentFith}"
+                        Style="{Binding ButtonStyleFith}" />
+
+                    <Border Width="1" Margin="4,0" Background="#E0E0E0" />
+
+                    <!-- Next Page Button -->
+                    <Button
+                        Command="{Binding GoToNextPageCommand}"
+                        Content="Trang sau →"
+                        Style="{StaticResource BackForwardButtonStyle}" />
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Border>
+</Page>

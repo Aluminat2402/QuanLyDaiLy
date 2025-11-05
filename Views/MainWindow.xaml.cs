@@ -99,6 +99,10 @@ namespace QuanLyDaiLy.Views
                     var loaiDaiLyPage = _serviceProvider.GetRequiredService<LoaiDaiLyViews.LoaiDaiLyPage>();
                     MainContent.Navigate(loaiDaiLyPage);
                     break;
+                case "Quan":
+                    var quanPage = _serviceProvider.GetRequiredService<QuanViews.QuanPage>();
+                    MainContent.Navigate(quanPage);
+                    break;
                 case "PhieuXuat":
                     var phieuXuatPage = _serviceProvider.GetRequiredService<PhieuXuatViews.PhieuXuatPage>();
                     MainContent.Navigate(phieuXuatPage);
