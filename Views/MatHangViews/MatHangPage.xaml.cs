@@ -1,27 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using QuanLyDaiLy.ViewModels.MatHangViewModels;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace QuanLyDaiLy.Views.MatHangViews
 {
-    /// <summary>
-    /// Interaction logic for MatHangPage.xaml
-    /// </summary>
-    public partial class MatHangPage : Window
+    public partial class MatHangPage : Page
     {
-        public MatHangPage()
+        public MatHangPage(MatHangPageViewModel vm)
         {
             InitializeComponent();
+            DataContext = vm;
         }
     }
 }
