@@ -12,6 +12,7 @@ namespace QuanLyDaiLy.Helpers
             SeedQuan(modelBuilder);
             SeedLoaiDaiLy(modelBuilder);
             SeedDaiLy(modelBuilder);
+            SeedPhieuXuat(modelBuilder);
         }
 
         private static void SeedThamSo(ModelBuilder modelBuilder)
@@ -24,9 +25,9 @@ namespace QuanLyDaiLy.Helpers
         private static void SeedQuan(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Quan>().HasData(
-                new Quan { MaQuan = 1, TenQuan = "Quận 1"}
+                new Quan { MaQuan = 1, TenQuan = "Quận 1" }
                 //Tương tự với các quận khác
-            ); 
+            );
         }
 
         private static void SeedLoaiDaiLy(ModelBuilder modelBuilder)
@@ -54,7 +55,18 @@ namespace QuanLyDaiLy.Helpers
                     TienNo = 15000000L
                 }
                 //Tương tự với các đại lý khác
-            ); 
+            );
         }
+
+        private static void SeedPhieuXuat(ModelBuilder modelBuilder)
+        {
+            var seedDate = new DateTime(2023, 1, 1);
+
+            modelBuilder.Entity<PhieuXuat>().HasData(
+                new PhieuXuat { MaPhieuXuat = 1, MaDaiLy = 1, NgayLapPhieu = seedDate.AddDays(22), TongTriGia = 1878538 },
+                new PhieuXuat { MaPhieuXuat = 2, MaDaiLy = 1, NgayLapPhieu = seedDate.AddDays(47), TongTriGia = 1003704 }
+                );
+        }
+
     }
 }

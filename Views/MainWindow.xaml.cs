@@ -99,36 +99,10 @@ namespace QuanLyDaiLy.Views
                     var loaiDaiLyPage = _serviceProvider.GetRequiredService<LoaiDaiLyViews.LoaiDaiLyPage>();
                     MainContent.Navigate(loaiDaiLyPage);
                     break;
-                //case "Quan":
-                //    var quanPage = _serviceProvider.GetRequiredService<QuanViews.QuanPage>();
-                //    MainContent.Navigate(quanPage);
-                //    break;
-                //case "MatHang":
-                //    var matHangPage = _serviceProvider.GetRequiredService<MatHangViews.MatHangPage>();
-                //    MainContent.Navigate(matHangPage);
-                //    break;
-                //case "PhieuThu":
-                //    var phieuThuPage = _serviceProvider.GetRequiredService<PhieuThuViews.PhieuThuPage>();
-                //    MainContent.Navigate(phieuThuPage);
-                //    break;
-                //case "PhieuXuat":
-                //    var phieuXuatPage = _serviceProvider.GetRequiredService<PhieuXuatViews.PhieuXuatPage>();
-                //    MainContent.Navigate(phieuXuatPage);
-                //    break;
-                //case "DonViTinh":
-                //    var donViTinhPage = _serviceProvider.GetRequiredService<DonViTinhViews.DonViTinhPage>();
-                //    MainContent.Navigate(donViTinhPage);
-                //    break;
-                //case "ThamSo":
-                //    var thamSoPage = _serviceProvider.GetRequiredService<ThamSoViews.ThamSoPage>();
-                //    MainContent.Navigate(thamSoPage);
-                //    StackPanelTabButton.Visibility = Visibility.Hidden;
-                //    break;
-                //case "BaoCao":
-                //    var baoCaoPage = _serviceProvider.GetRequiredService<BaoCaoViews.BaoCaoChiTietPage>();
-                //    MainContent.Navigate(baoCaoPage);
-                //    StackPanelTabButton.Visibility = Visibility.Hidden;
-                //    break;
+                case "PhieuXuat":
+                    var phieuXuatPage = _serviceProvider.GetRequiredService<PhieuXuatViews.PhieuXuatPage>();
+                    MainContent.Navigate(phieuXuatPage);
+                    break;
                 default:
                     break;
             }

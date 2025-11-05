@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 namespace QuanLyDaiLy.Models
 {
@@ -31,5 +32,7 @@ namespace QuanLyDaiLy.Models
         // Navigation properties
         public LoaiDaiLy LoaiDaiLy { get; set; } = null;
         public Quan Quan { get; set; } = null;
+        public ICollection<PhieuXuat> DsPhieuXuat { get; set; } = [];
+
     }
 }
