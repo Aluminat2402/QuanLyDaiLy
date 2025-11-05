@@ -339,6 +339,76 @@ namespace QuanLyDaiLy.ViewModels.QuanViewModels
         }
 
         [RelayCommand]
+        private void EditQuan()
+        {
+            if (SelectedQuan == null || string.IsNullOrEmpty(SelectedQuan.TenQuan))
+            {
+                MessageBox.Show("Vui lòng chọn quận để chỉnh sửa!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            try
+            {
+                var window = _serviceProvider.GetRequiredService<CapNhatQuanWindow>();
+                window.Show();
+                WeakReferenceMessenger.Default.Send(new SelectedIdMessage(SelectedQuan.MaQuan));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi mở cửa sổ chỉnh sửa quận: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        [RelayCommand]
+        private async Task DeleteQuan()
+        {
+            if (SelectedQuan == null)
+            {
+                MessageBox.Show("Vui lòng chọn quận để xóa!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            try
+            {
+                var soLuongDaiLyTrongQuan = SelectedQuan.DsDaiLy.Count;
+
+                if (soLuongDaiLyTrongQuan > 0)
+                {
+                    var result = MessageBox.Show(
+                        $"Quận '{SelectedQuan.TenQuan}' đang chứa {soLuongDaiLyTrongQuan} đại lý. Bạn có chắc chắn muốn xóa quận này?",
+                        "Xác nhận xóa",
+                        MessageBoxButton.YesNo,
+                        MessageBoxImage.Question);
+
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        await _quanService.DeleteQuan(SelectedQuan.MaQuan);
+                        MessageBox.Show("Đã xóa quận thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                        await LoadDataAsync();
+                    }
+                }
+                else
+                {
+                    var result = MessageBox.Show(
+                        $"Bạn có chắc chắn muốn xóa quận '{SelectedQuan.TenQuan}'?",
+                        "Xác nhận xóa",
+                        MessageBoxButton.YesNo,
+                        MessageBoxImage.Question);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        await _quanService.DeleteQuan(SelectedQuan.MaQuan);
+                        MessageBox.Show("Đã xóa quận thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                        await LoadDataAsync();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi xóa quận: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        [RelayCommand]
         private async Task LoadData()
         {
             SelectedQuan = null!;

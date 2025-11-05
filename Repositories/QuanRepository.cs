@@ -29,6 +29,16 @@ namespace QuanLyDaiLy.Repositories
             await _context.SaveChangesAsync();
         }
 
+        public async Task DeleteQuan(int id)
+        {
+            var quan = await _context.DsQuan.FindAsync(id);
+            if (quan != null)
+            {
+                _context.DsQuan.Remove(quan);
+                await _context.SaveChangesAsync();
+            }
+        }
+
         public async Task<IEnumerable<Quan>> GetAllQuan()
         {
             return await _context.DsQuan
@@ -57,6 +67,12 @@ namespace QuanLyDaiLy.Repositories
                 .Skip(offset * size)
                 .Take(size)
                 .ToListAsync();
+        }
+
+        public async Task UpdateQuan(Quan quan)
+        {
+            _context.Entry(quan).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
         }
 
         public async Task<int> GetTotalPages(int size = 12)

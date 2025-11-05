@@ -49,6 +49,7 @@ public static class ApplicationServiceExtensions
 
         services.AddTransient<ViewModels.QuanViewModels.QuanPageViewModel>();
         services.AddTransient<ViewModels.QuanViewModels.ThemQuanViewModel>();
+        services.AddTransient<ViewModels.QuanViewModels.ChinhSuaQuanViewModel>();
 
         services.AddSingleton<Views.MainWindow>();
 
@@ -78,6 +79,7 @@ public static class ApplicationServiceExtensions
 
         services.AddTransient<Views.QuanViews.QuanPage>();
         services.AddTransient<Views.QuanViews.ThemQuanWindow>();
+        services.AddTransient<Views.QuanViews.CapNhatQuanWindow>();
 
         return services;
     }
