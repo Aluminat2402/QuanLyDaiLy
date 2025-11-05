@@ -12,6 +12,7 @@ namespace QuanLyDaiLy.Services
         Task<int> GetTotalPages(int size = 20);
 
         Task AddPhieuXuat(PhieuXuat phieuXuat);
+        Task UpdatePhieuXuat(PhieuXuat phieuXuat);
         Task<int> GenerateAvailableId();
     }
 }

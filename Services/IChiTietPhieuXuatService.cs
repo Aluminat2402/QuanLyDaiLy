@@ -10,6 +10,7 @@ namespace QuanLyDaiLy.Services
         Task<IEnumerable<ChiTietPhieuXuat>> GetAllChiTietPhieuXuat();
 
         Task AddChiTietPhieuXuat(ChiTietPhieuXuat chiTietPhieuXuat);
+        Task DeleteChiTietPhieuXuat(int id);
 
         Task<IEnumerable<ChiTietPhieuXuat>> GetChiTietPhieuXuatByPhieuXuatId(int maPhieuXuat);
     }

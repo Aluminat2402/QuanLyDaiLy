@@ -29,6 +29,16 @@ namespace QuanLyDaiLy.Repositories
             await _context.SaveChangesAsync();
         }
 
+        public async Task DeleteChiTietPhieuXuat(int id)
+        {
+            var chiTietPhieuXuat = await _context.DsChiTietPhieuXuat.FindAsync(id);
+            if (chiTietPhieuXuat != null)
+            {
+                _context.DsChiTietPhieuXuat.Remove(chiTietPhieuXuat);
+                await _context.SaveChangesAsync();
+            }
+        }
+
         public async Task<IEnumerable<ChiTietPhieuXuat>> GetAllChiTietPhieuXuat()
         {
             return await _context.DsChiTietPhieuXuat
