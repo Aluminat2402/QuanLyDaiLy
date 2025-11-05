@@ -45,6 +45,7 @@ public static class ApplicationServiceExtensions
         services.AddTransient<ViewModels.LoaiDaiLyViewModels.TraCuuLoaiDaiLyWindowViewModel>();
 
         services.AddTransient<ViewModels.QuanViewModels.QuanPageViewModel>();
+        services.AddTransient<ViewModels.QuanViewModels.ThemQuanViewModel>();
 
         services.AddSingleton<Views.MainWindow>();
 
@@ -63,6 +64,7 @@ public static class ApplicationServiceExtensions
         services.AddTransient<Views.LoaiDaiLyViews.TraCuuLoaiDaiLyWindow>();
 
         services.AddTransient<Views.QuanViews.QuanPage>();
+        services.AddTransient<Views.QuanViews.ThemQuanWindow>();
 
         return services;
     }
