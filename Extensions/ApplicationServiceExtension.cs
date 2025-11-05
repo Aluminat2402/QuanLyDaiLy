@@ -40,6 +40,7 @@ public static class ApplicationServiceExtensions
         services.AddTransient<PhieuXuatPageViewModel>();
         services.AddTransient<ThemPhieuXuatViewModel>();
         services.AddTransient<CapNhatPhieuXuatViewModel>();
+        services.AddTransient<TraCuuPhieuXuatWindow>();
 
         services.AddTransient<ViewModels.LoaiDaiLyViewModels.LoaiDaiLyPageViewModel>();
         services.AddTransient<ViewModels.LoaiDaiLyViewModels.ThemLoaiDaiLyViewModel>();
@@ -59,8 +60,8 @@ public static class ApplicationServiceExtensions
 
         services.AddTransient<PhieuXuatPage>();
         services.AddTransient<ThemPhieuXuatWindow>();
-        services.AddTransient<Func<int, ViewModels.PhieuXuatViewModels.CapNhatPhieuXuatViewModel>>(px => phieuXuatId =>
-            new ViewModels.PhieuXuatViewModels.CapNhatPhieuXuatViewModel(
+        services.AddTransient<Func<int, CapNhatPhieuXuatViewModel>>(px => phieuXuatId =>
+            new CapNhatPhieuXuatViewModel(
                 px.GetRequiredService<IPhieuXuatService>(),
                 px.GetRequiredService<IChiTietPhieuXuatService>(),
                 px.GetRequiredService<IDaiLyService>(),
@@ -68,6 +69,7 @@ public static class ApplicationServiceExtensions
                 px.GetRequiredService<ILoaiDaiLyService>()
             )
         );
+        services.AddTransient<TraCuuPhieuXuatViewModel>();
 
         services.AddTransient<Views.LoaiDaiLyViews.LoaiDaiLyPage>();
         services.AddTransient<Views.LoaiDaiLyViews.ThemLoaiDaiLyWindow>();

@@ -368,5 +368,26 @@ namespace QuanLyDaiLy.ViewModels.PhieuXuatViewModels
                     MessageBoxImage.Error);
             }
         }
+
+        [RelayCommand]
+        private void SearchPhieuXuat()
+        {
+            SelectedPhieuXuat = null!;
+
+            var traCuuPhieuXuatWindow = _serviceProvider.GetRequiredService<TraCuuPhieuXuatWindow>();
+
+            if (traCuuPhieuXuatWindow.DataContext is TraCuuPhieuXuatViewModel viewModel)
+            {
+                viewModel.PropertyChanged += (sender, args) =>
+                {
+                    if (args.PropertyName == nameof(viewModel.SearchResults) && viewModel.SearchResults != null)
+                    {
+                        DanhSachPhieuXuat = viewModel.SearchResults;
+                    }
+                };
+            }
+
+            traCuuPhieuXuatWindow.Show();
+        }
     }
 }
