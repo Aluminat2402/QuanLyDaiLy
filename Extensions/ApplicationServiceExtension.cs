@@ -7,6 +7,7 @@ using QuanLyDaiLy.ViewModels;
 using QuanLyDaiLy.ViewModels.PhieuXuatViewModels;
 using QuanLyDaiLy.Views;
 using QuanLyDaiLy.Views.PhieuXuatViews;
+using System;
 using System.Windows.Navigation;
 
 namespace QuanLyDaiLy.Extensions;
@@ -39,6 +40,7 @@ public static class ApplicationServiceExtensions
         // PhieuXuat ViewModels
         services.AddTransient<PhieuXuatPageViewModel>();
         services.AddTransient<ThemPhieuXuatViewModel>();
+        services.AddTransient<CapNhatPhieuXuatViewModel>();
 
         services.AddTransient<ViewModels.LoaiDaiLyViewModels.LoaiDaiLyPageViewModel>();
         services.AddTransient<ViewModels.LoaiDaiLyViewModels.ThemLoaiDaiLyViewModel>();
@@ -56,6 +58,15 @@ public static class ApplicationServiceExtensions
         // PhieuXuat Views
         services.AddTransient<PhieuXuatPage>();
         services.AddTransient<ThemPhieuXuatWindow>();
+        services.AddTransient<Func<int, ViewModels.PhieuXuatViewModels.CapNhatPhieuXuatViewModel>>(px => phieuXuatId =>
+            new ViewModels.PhieuXuatViewModels.CapNhatPhieuXuatViewModel(
+                px.GetRequiredService<IPhieuXuatService>(),
+                px.GetRequiredService<IChiTietPhieuXuatService>(),
+                px.GetRequiredService<IDaiLyService>(),
+                px.GetRequiredService<IMatHangService>(),
+                px.GetRequiredService<ILoaiDaiLyService>()
+            )
+        );
 
         services.AddTransient<Views.LoaiDaiLyViews.LoaiDaiLyPage>();
         services.AddTransient<Views.LoaiDaiLyViews.ThemLoaiDaiLyWindow>();

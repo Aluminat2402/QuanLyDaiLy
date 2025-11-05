@@ -17,9 +17,11 @@ namespace QuanLyDaiLy.ViewModels.PhieuXuatViewModels
 {
     public partial class PhieuXuatPageViewModel:
         ObservableObject,
+        IRecipient<SearchCompletedMessage<PhieuXuat>>,
         IRecipient<DataReloadMessage>
     {
         private readonly IPhieuXuatService _phieuXuatService;
+        private readonly Func<int, CapNhatPhieuXuatViewModel> _capNhatPhieuXuatFactory;
         private readonly IServiceProvider _serviceProvider;
 
         private int TotalPages = 0;
@@ -30,11 +32,13 @@ namespace QuanLyDaiLy.ViewModels.PhieuXuatViewModels
 
         public PhieuXuatPageViewModel(
             IPhieuXuatService phieuXuatService,
-            IServiceProvider serviceProvider
+            IServiceProvider serviceProvider,
+            Func<int, CapNhatPhieuXuatViewModel> capNhatPhieuXuatFactory
         )
         {
             _phieuXuatService = phieuXuatService;
             _serviceProvider = serviceProvider;
+            _capNhatPhieuXuatFactory = capNhatPhieuXuatFactory;
 
             // Only keep the parameterized command that can't use RelayCommand attribute
             PageSelectionCommand = new RelayCommand<string>(SelectPage);
@@ -338,6 +342,31 @@ namespace QuanLyDaiLy.ViewModels.PhieuXuatViewModels
 
             var addPhieuXuatWindow = _serviceProvider.GetRequiredService<ThemPhieuXuatWindow>();
             addPhieuXuatWindow.Show();
+        }
+
+        [RelayCommand]
+        private void EditPhieuXuat()
+        {
+            if (SelectedPhieuXuat == null!)
+            {
+                MessageBox.Show("Vui lòng chọn phiếu xuất để chỉnh sửa!", "Thông báo", MessageBoxButton.OK,
+                    MessageBoxImage.Information);
+                return;
+            }
+
+            try
+            {
+                var viewmodel = _capNhatPhieuXuatFactory(SelectedPhieuXuat.MaPhieuXuat);
+
+                var window = new CapNhatPhieuXuatWindow(viewmodel);
+                window.Show();
+                WeakReferenceMessenger.Default.Send(new SelectedIdMessage(SelectedPhieuXuat.MaPhieuXuat));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi mở cửa sổ chỉnh sửa phiếu xuất: {ex.Message}", "Lỗi", MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+            }
         }
     }
 }
