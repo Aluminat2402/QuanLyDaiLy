@@ -8,6 +8,7 @@ using QuanLyDaiLy.Services;
 using QuanLyDaiLy.Views.MatHangViews;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -323,80 +324,81 @@ namespace QuanLyDaiLy.ViewModels.MatHangViewModels
             }
         }
 
-        //[RelayCommand]
-        //private async Task SearchMatHang()
-        //{
-        //    SelectedMatHang = null!;
+        [RelayCommand]
 
-        //    var traCuuMatHangWindow = _serviceProvider.GetRequiredService<TraCuuMatHangWindow>();
-        //    traCuuMatHangWindow.Show();
-        //}
+        private async Task SearchMatHang()
+        {
+            SelectedMatHang = null!;
 
-        //[RelayCommand]
-        //private void AddMatHang()
-        //{
-        //    try
-        //    {
-        //        var addMatHangWindow = _serviceProvider.GetRequiredService<ThemMatHangWindow>();
-        //        addMatHangWindow.Show();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show($"Lỗi khi mở cửa sổ thêm mặt hàng: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
-        //    }
-        //    SelectedMatHang = null!;
-        //}
+            var traCuuMatHangWindow = _serviceProvider.GetRequiredService<TraCuuMatHangWindow>();
+            traCuuMatHangWindow.Show();
+        }
 
-        //[RelayCommand]
-        //private void EditMatHang()
-        //{
-        //    if (SelectedMatHang == null || string.IsNullOrEmpty(SelectedMatHang.TenMatHang))
-        //    {
-        //        MessageBox.Show("Vui lòng chọn mặt hàng để chỉnh sửa!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
-        //        return;
-        //    }
+        [RelayCommand]
+        private void AddMatHang()
+        {
+            try
+            {
+                var addMatHangWindow = _serviceProvider.GetRequiredService<ThemMatHangWindow>();
+                addMatHangWindow.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi mở cửa sổ thêm mặt hàng: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            SelectedMatHang = null!;
+        }
 
-        //    try
-        //    {
-        //        var window = _serviceProvider.GetRequiredService<CapNhatMatHangWindow>();
-        //        window.Show();
-        //        WeakReferenceMessenger.Default.Send(new SelectedIdMessage(SelectedMatHang.MaMatHang));
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show($"Lỗi khi mở cửa sổ chỉnh sửa mặt hàng: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
-        //    }
-        //}
+        [RelayCommand]
+        private void EditMatHang()
+        {
+            if (SelectedMatHang == null || string.IsNullOrEmpty(SelectedMatHang.TenMatHang))
+            {
+                MessageBox.Show("Vui lòng chọn mặt hàng để chỉnh sửa!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
 
-        //[RelayCommand]
-        //private async Task DeleteMatHang()
-        //{
-        //    if (SelectedMatHang == null)
-        //    {
-        //        MessageBox.Show("Vui lòng chọn mặt hàng để xóa!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
-        //        return;
-        //    }
+            try
+            {
+                var window = _serviceProvider.GetRequiredService<CapNhatMatHangWindow>();
+                window.Show();
+                WeakReferenceMessenger.Default.Send(new SelectedIdMessage(SelectedMatHang.MaMatHang));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi mở cửa sổ chỉnh sửa mặt hàng: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
 
-        //    try
-        //    {
-        //        var result = MessageBox.Show(
-        //            $"Bạn có chắc chắn muốn xóa mặt hàng '{SelectedMatHang.TenMatHang}'?",
-        //            "Xác nhận xóa",
-        //            MessageBoxButton.YesNo,
-        //            MessageBoxImage.Question);
+        [RelayCommand]
+        private async Task DeleteMatHang()
+        {
+            if (SelectedMatHang == null)
+            {
+                MessageBox.Show("Vui lòng chọn mặt hàng để xóa!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
 
-        //        if (result == MessageBoxResult.Yes)
-        //        {
-        //            await _matHangService.DeleteMatHang(SelectedMatHang.MaMatHang);
-        //            MessageBox.Show("Đã xóa mặt hàng thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
-        //            await LoadDataAsync();
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show($"Lỗi khi xóa mặt hàng: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
-        //    }
-        //}
+            try
+            {
+                var result = MessageBox.Show(
+                    $"Bạn có chắc chắn muốn xóa mặt hàng '{SelectedMatHang.TenMatHang}'?",
+                    "Xác nhận xóa",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Question);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    await _matHangService.DeleteMatHang(SelectedMatHang.MaMatHang);
+                    MessageBox.Show("Đã xóa mặt hàng thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    await LoadDataAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi xóa mặt hàng: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
 
         [RelayCommand]
         private async Task LoadData()

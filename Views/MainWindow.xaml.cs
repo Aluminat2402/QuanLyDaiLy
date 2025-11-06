@@ -107,6 +107,10 @@ namespace QuanLyDaiLy.Views
                     var phieuXuatPage = _serviceProvider.GetRequiredService<PhieuXuatViews.PhieuXuatPage>();
                     MainContent.Navigate(phieuXuatPage);
                     break;
+                case "MatHang":
+                    var matHangPage = _serviceProvider.GetRequiredService<MatHangViews.MatHangPage>();
+                    MainContent.Navigate(matHangPage);
+                    break;
                 default:
                     break;
             }

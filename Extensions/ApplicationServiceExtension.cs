@@ -27,6 +27,7 @@ public static class ApplicationServiceExtensions
         services.AddScoped<IPhieuXuatService, PhieuXuatRepository>();
         services.AddScoped<IMatHangService, MatHangRepository>();
         services.AddScoped<IChiTietPhieuXuatService, ChiTietPhieuXuatRepository>();
+        services.AddScoped<IDonViTinhService, DonViTinhRepository>();
 
         // Register helpers
         services.AddSingleton<ComboBoxItemConverter>();
@@ -48,6 +49,8 @@ public static class ApplicationServiceExtensions
         services.AddTransient<ViewModels.LoaiDaiLyViewModels.TraCuuLoaiDaiLyWindowViewModel>();
 
         services.AddTransient<ViewModels.MatHangViewModels.MatHangPageViewModel>();
+        services.AddTransient<ViewModels.MatHangViewModels.ThemMatHangWindowViewModel>();
+        services.AddTransient<ViewModels.MatHangViewModels.CapNhatMatHangWindowViewModel>();
         services.AddTransient<ViewModels.MatHangViewModels.TraCuuMatHangWindowViewModel>();
 
         services.AddTransient<ViewModels.QuanViewModels.QuanPageViewModel>();
@@ -80,6 +83,8 @@ public static class ApplicationServiceExtensions
         services.AddTransient<Views.LoaiDaiLyViews.TraCuuLoaiDaiLyWindow>();
 
         services.AddTransient<Views.MatHangViews.MatHangPage>();
+        services.AddTransient<Views.MatHangViews.ThemMatHangWindow>();
+        services.AddTransient<Views.MatHangViews.CapNhatMatHangWindow>();
         services.AddTransient<Views.MatHangViews.TraCuuMatHangWindow>();
 
         services.AddTransient<Views.QuanViews.QuanPage>();

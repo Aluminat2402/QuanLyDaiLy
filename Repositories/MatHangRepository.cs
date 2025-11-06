@@ -23,6 +23,22 @@ namespace QuanLyDaiLy.Repositories
             }
         }
 
+        public async Task AddMatHang(MatHang matHang)
+        {
+            _context.DsMatHang.Add(matHang);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteMatHang(int id)
+        {
+            var matHang = await _context.DsMatHang.FindAsync(id);
+            if (matHang != null)
+            {
+                _context.DsMatHang.Remove(matHang);
+                await _context.SaveChangesAsync();
+            }
+        }
+
         public async Task<IEnumerable<MatHang>> GetAllMatHang()
         {
             return await _context.DsMatHang
