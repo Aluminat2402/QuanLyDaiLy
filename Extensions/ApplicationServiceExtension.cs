@@ -5,10 +5,11 @@ using QuanLyDaiLy.Repositories;
 using QuanLyDaiLy.Services;
 using QuanLyDaiLy.ViewModels;
 using QuanLyDaiLy.ViewModels.PhieuXuatViewModels;
+using QuanLyDaiLy.ViewModels.DonViTinhViewModels;
 using QuanLyDaiLy.Views;
 using QuanLyDaiLy.Views.PhieuXuatViews;
+using QuanLyDaiLy.Views.DonViTinhViews;
 using System;
-using System.Windows.Navigation;
 
 namespace QuanLyDaiLy.Extensions;
 
@@ -57,6 +58,9 @@ public static class ApplicationServiceExtensions
         services.AddTransient<ViewModels.QuanViewModels.ThemQuanViewModel>();
         services.AddTransient<ViewModels.QuanViewModels.ChinhSuaQuanViewModel>();
 
+        services.AddTransient<DonViTinhPageViewModel>();
+        services.AddTransient<ThemDonViTinhViewModel>();
+
         services.AddSingleton<Views.MainWindow>();
 
         // Register Views
@@ -91,6 +95,9 @@ public static class ApplicationServiceExtensions
         services.AddTransient<Views.QuanViews.QuanPage>();
         services.AddTransient<Views.QuanViews.ThemQuanWindow>();
         services.AddTransient<Views.QuanViews.CapNhatQuanWindow>();
+
+        services.AddTransient<DonViTinhPage>();
+        services.AddTransient<ThemDonViTinhWindow>();
 
         return services;
     }

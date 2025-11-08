@@ -58,6 +58,13 @@ public class DataContext(DbContextOptions<DataContext> options) : DbContext(opti
             .HasForeignKey(c => c.MaMatHang)
             .OnDelete(DeleteBehavior.Cascade);
 
+        // MatHang (1:n) <- (1:1) DonViTinh
+        modelBuilder.Entity<MatHang>()
+            .HasOne(m => m.DonViTinh)
+            .WithMany(d => d.DsMatHang)
+            .HasForeignKey(m => m.MaDonViTinh)
+            .OnDelete(DeleteBehavior.Cascade);
+
         DatabaseSeeder.Seed(modelBuilder);
     }
 }

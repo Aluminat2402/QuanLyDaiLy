@@ -111,6 +111,10 @@ namespace QuanLyDaiLy.Views
                     var matHangPage = _serviceProvider.GetRequiredService<MatHangViews.MatHangPage>();
                     MainContent.Navigate(matHangPage);
                     break;
+                case "DonViTinh":
+                    var donViTinhPage = _serviceProvider.GetRequiredService<DonViTinhViews.DonViTinhPage>();
+                    MainContent.Navigate(donViTinhPage);
+                    break;
                 default:
                     break;
             }
