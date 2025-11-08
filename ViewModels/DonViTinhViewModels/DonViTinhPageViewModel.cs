@@ -1,9 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using Microsoft.Extensions.DependencyInjection;
 using QuanLyDaiLy.Messages;
 using QuanLyDaiLy.Models;
 using QuanLyDaiLy.Services;
+using QuanLyDaiLy.Views.DonViTinhViews;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -323,6 +325,21 @@ namespace QuanLyDaiLy.ViewModels.DonViTinhViewModels
             }
         }
         #endregion
+
+        [RelayCommand]
+        private void AddDonViTinh()
+        {
+            try
+            {
+                var addDonViTinhWindow = _serviceProvider.GetRequiredService<ThemDonViTinhWindow>();
+                addDonViTinhWindow.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi mở cửa sổ thêm đơn vị tính: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            SelectedDonViTinh = null!;
+        }
 
         [RelayCommand]
         private async Task DeleteDonViTinh()
