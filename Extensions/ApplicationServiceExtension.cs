@@ -60,6 +60,7 @@ public static class ApplicationServiceExtensions
 
         services.AddTransient<DonViTinhPageViewModel>();
         services.AddTransient<ThemDonViTinhViewModel>();
+        services.AddTransient<CapNhatDonViTinhViewModel>();
 
         services.AddSingleton<Views.MainWindow>();
 
@@ -98,6 +99,7 @@ public static class ApplicationServiceExtensions
 
         services.AddTransient<DonViTinhPage>();
         services.AddTransient<ThemDonViTinhWindow>();
+        services.AddTransient<CapNhatDonViTinhWindow>();
 
         return services;
     }

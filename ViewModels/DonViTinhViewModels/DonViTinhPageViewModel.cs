@@ -388,6 +388,27 @@ namespace QuanLyDaiLy.ViewModels.DonViTinhViewModels
         }
 
         [RelayCommand]
+        private void EditDonViTinh()
+        {
+            if (SelectedDonViTinh == null || string.IsNullOrEmpty(SelectedDonViTinh.TenDonViTinh))
+            {
+                MessageBox.Show("Vui lòng chọn đơn vị tính để chỉnh sửa!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            try
+            {
+                var window = _serviceProvider.GetRequiredService<CapNhatDonViTinhWindow>();
+                window.Show();
+                WeakReferenceMessenger.Default.Send(new SelectedIdMessage(SelectedDonViTinh.MaDonViTinh));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi mở cửa sổ chỉnh sửa đơn vị tính: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        [RelayCommand]
         private async Task LoadData()
         {
             SelectedDonViTinh = null!;
