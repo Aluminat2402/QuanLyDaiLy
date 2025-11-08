@@ -21,15 +21,15 @@ namespace QuanLyDaiLy.ViewModels.PhieuXuatViewModels
         private readonly ILoaiDaiLyService _loaiDaiLyService;
         private readonly IQuanService _quanService;
         private readonly IMatHangService _matHangService;
-        //private readonly IDonViTinhService _donViTinhService;
+        private readonly IDonViTinhService _donViTinhService;
 
         public TraCuuPhieuXuatViewModel(
             IDaiLyService daiLyService,
             IPhieuXuatService phieuXuatService,
             ILoaiDaiLyService loaiDaiLyService,
             IQuanService quanService,
-            IMatHangService matHangService
-            //IDonViTinhService donViTinhService
+            IMatHangService matHangService,
+            IDonViTinhService donViTinhService
             )
         {
             _daiLyService = daiLyService;
@@ -37,7 +37,7 @@ namespace QuanLyDaiLy.ViewModels.PhieuXuatViewModels
             _loaiDaiLyService = loaiDaiLyService;
             _quanService = quanService;
             _matHangService = matHangService;
-            //_donViTinhService = donViTinhService;
+            _donViTinhService = donViTinhService;
 
             _ = LoadDataAsync();
         }
@@ -158,13 +158,13 @@ namespace QuanLyDaiLy.ViewModels.PhieuXuatViewModels
                 var listLoaiDaiLy = await _loaiDaiLyService.GetAllLoaiDaiLy();
                 var listQuan = await _quanService.GetAllQuan();
                 var listMatHang = await _matHangService.GetAllMatHang();
-                //var listDonViTinh = await _donViTinhService.GetAllDonViTinh();
+                var listDonViTinh = await _donViTinhService.GetAllDonViTinh();
 
                 LoaiDaiLies.Clear();
                 DaiLies.Clear();
                 Quans.Clear();
                 MatHangXuats.Clear();
-                //DonViTinhs.Clear();
+                DonViTinhs.Clear();
 
 
                 // Populate the collections
@@ -172,7 +172,7 @@ namespace QuanLyDaiLy.ViewModels.PhieuXuatViewModels
                 DaiLies = new ObservableCollection<DaiLy>(listDaiLy);
                 Quans = new ObservableCollection<Quan>(listQuan);
                 MatHangXuats = new ObservableCollection<MatHang>(listMatHang);
-                //DonViTinhs = new ObservableCollection<DonViTinh>(listDonViTinh);
+                DonViTinhs = new ObservableCollection<DonViTinh>(listDonViTinh);
 
             }
             catch (Exception ex)
@@ -298,14 +298,14 @@ namespace QuanLyDaiLy.ViewModels.PhieuXuatViewModels
 
                 }
 
-                //if (SelectedDonViTinhs.MaDonViTinh != 0)
-                //{
+                if (SelectedDonViTinhs.MaDonViTinh != 0)
+                {
 
-                //    if (SelectedDonViTinhs.MaDonViTinh != 0)
-                //    {
-                //        phieuXuats = phieuXuats.Where(d => d.DsChiTietPhieuXuat.Any(ct => ct.MatHang.MaDonViTinh == SelectedDonViTinhs.MaDonViTinh));
-                //    }
-                //}
+                    if (SelectedDonViTinhs.MaDonViTinh != 0)
+                    {
+                        phieuXuats = phieuXuats.Where(d => d.DsChiTietPhieuXuat.Any(ct => ct.MatHang.MaDonViTinh == SelectedDonViTinhs.MaDonViTinh));
+                    }
+                }
 
                 if (!string.IsNullOrEmpty(SoLuongXuatCuaMatHangXuatFrom) && !string.IsNullOrEmpty(SoLuongXuatCuaMatHangXuatTo)
                     && int.TryParse(SoLuongXuatCuaMatHangXuatFrom, out var fromSoLuong) && int.TryParse(SoLuongXuatCuaMatHangXuatTo, out var toSoLuong))
