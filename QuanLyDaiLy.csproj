@@ -11,14 +11,9 @@
     <PackageReference Include="FontAwesome" Version="4.7.0" />
     <PackageReference Include="FontAwesome.WPF" Version="4.7.0.9" />
     <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.0-rc.2.25502.107" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ViewModels\MatHangViewModels\" />
-    <Folder Include="Views\MatHangViews\" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.3" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.3" />
   </ItemGroup>
 
 </Project>
