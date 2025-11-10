@@ -320,7 +320,7 @@ namespace QuanLyDaiLy.ViewModels.PhieuThuViewModels
                 MessageBox.Show($"Lỗi khi mở cửa sổ thêm phiếu thu: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        //[RelayCommand]
+        [RelayCommand]
         //private void AddPhieuThu()
         //{
         //    SelectedPhieuThu = null!;
@@ -335,29 +335,29 @@ namespace QuanLyDaiLy.ViewModels.PhieuThuViewModels
         //    }
         //}
         //[RelayCommand]
-        //private async Task DeletePhieuThu()
-        //{
-        //    if (SelectedPhieuThu == null! || string.IsNullOrEmpty(SelectedPhieuThu.MaPhieuThu.ToString()))
-        //    {
-        //        MessageBox.Show("Vui lòng chọn phiếu thu để xóa!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
-        //        return;
-        //    }
+        private async Task DeletePhieuThu()
+        {
+            if (SelectedPhieuThu == null! || string.IsNullOrEmpty(SelectedPhieuThu.MaPhieuThu.ToString()))
+            {
+                MessageBox.Show("Vui lòng chọn phiếu thu để xóa!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
 
-        //    try
-        //    {
-        //        var result = MessageBox.Show("Bạn có chắc chắn muốn xóa phiếu thu này?", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Question);
-        //        if (result == MessageBoxResult.Yes)
-        //        {
-        //            await _phieuThuService.DeletePhieuThu(SelectedPhieuThu.MaPhieuThu);
-        //            MessageBox.Show("Đã xóa phiếu thu thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
-        //            await LoadDataAsync();
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show($"Có lỗi xảy ra khi xóa phiếu thu: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
-        //    }
-        //}
+            try
+            {
+                var result = MessageBox.Show("Bạn có chắc chắn muốn xóa phiếu thu này?", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    await _phieuThuService.DeletePhieuThu(SelectedPhieuThu.MaPhieuThu);
+                    MessageBox.Show("Đã xóa phiếu thu thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    await LoadDataAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Có lỗi xảy ra khi xóa phiếu thu: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
 
         [RelayCommand]
         private async Task SearchPhieuThu()
