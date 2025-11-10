@@ -115,6 +115,10 @@ namespace QuanLyDaiLy.Views
                     var donViTinhPage = _serviceProvider.GetRequiredService<DonViTinhViews.DonViTinhPage>();
                     MainContent.Navigate(donViTinhPage);
                     break;
+                case "PhieuThu":
+                    var phieuThuPage = _serviceProvider.GetRequiredService<PhieuThuViews.PhieuThuPage>();
+                    MainContent.Navigate(phieuThuPage);
+                    break;
                 default:
                     break;
             }
