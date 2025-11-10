@@ -305,6 +305,21 @@ namespace QuanLyDaiLy.ViewModels.PhieuThuViewModels
             await LoadDataAsync();
             MessageBox.Show("Tải lại danh sách thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
         }
+
+        [RelayCommand]
+        private void AddPhieuThu()
+        {
+            SelectedPhieuThu = null!;
+            try
+            {
+                var addPhieuThuWindow = _serviceProvider.GetRequiredService<ThemPhieuThuWindow>();
+                addPhieuThuWindow.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi mở cửa sổ thêm phiếu thu: {ex.Message}", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
         #endregion
     }
 }

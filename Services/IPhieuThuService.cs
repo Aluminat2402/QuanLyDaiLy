@@ -11,6 +11,8 @@ namespace QuanLyDaiLy.Services
         Task<IEnumerable<PhieuThu>> GetAllPhieuThu();
         Task<IEnumerable<PhieuThu>> GetPhieuThuPage(int offset, int size = 20);
         Task<int> GetTotalPages(int size = 20);
+        Task AddPhieuThu(PhieuThu phieuThu);
+        Task<int> GenerateAvailableId();
 
     }
 }

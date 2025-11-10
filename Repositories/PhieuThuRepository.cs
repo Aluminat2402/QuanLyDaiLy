@@ -29,7 +29,11 @@ namespace QuanLyDaiLy.Repositories
                 .Include(p => p.DaiLy)
                 .ToListAsync();
         }
-
+        public async Task<int> GenerateAvailableId()
+        {
+            int maxId = await _context.DsPhieuThu.MaxAsync(d => d.MaPhieuThu);
+            return maxId + 1;
+        }
         public async Task<IEnumerable<PhieuThu>> GetPhieuThuPage(int offset, int size = 20)
         {
             return await _context.DsPhieuThu
@@ -47,6 +51,11 @@ namespace QuanLyDaiLy.Repositories
                 totalPages++;
             }
             return totalPages;
+        }
+        public async Task AddPhieuThu(PhieuThu phieuThu)
+        {
+            _context.DsPhieuThu.Add(phieuThu);
+            await _context.SaveChangesAsync();
         }
     }
 }

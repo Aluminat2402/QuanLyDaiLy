@@ -32,6 +32,7 @@ namespace QuanLyDaiLy.Models
         // Navigation properties
         public LoaiDaiLy LoaiDaiLy { get; set; } = null;
         public Quan Quan { get; set; } = null;
+        public ICollection<PhieuThu> DsPhieuThu { get; set; } = [];
         public ICollection<PhieuXuat> DsPhieuXuat { get; set; } = [];
 
     }

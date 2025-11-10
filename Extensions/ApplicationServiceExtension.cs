@@ -64,6 +64,7 @@ public static class ApplicationServiceExtensions
         services.AddTransient<CapNhatDonViTinhViewModel>();
 
         services.AddTransient<ViewModels.PhieuThuViewModels.PhieuThuPageViewModel>();
+        services.AddTransient<ViewModels.PhieuThuViewModels.ThemPhieuThuWindowViewModel>();
 
         services.AddSingleton<Views.MainWindow>();
 
@@ -101,6 +102,7 @@ public static class ApplicationServiceExtensions
         services.AddTransient<Views.QuanViews.CapNhatQuanWindow>();
 
         services.AddTransient<Views.PhieuThuViews.PhieuThuPage>();
+        services.AddTransient<Views.PhieuThuViews.ThemPhieuThuWindow>();
 
         services.AddTransient<DonViTinhPage>();
         services.AddTransient<ThemDonViTinhWindow>();
