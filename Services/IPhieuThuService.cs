@@ -13,6 +13,14 @@ namespace QuanLyDaiLy.Services
         Task<int> GetTotalPages(int size = 20);
         Task AddPhieuThu(PhieuThu phieuThu);
         Task<int> GenerateAvailableId();
+        Task UpdatePhieuThu(PhieuThu phieuThu);
 
+        Task<IEnumerable<PhieuThu>> GetPhieuThuByDaiLyId(int maDaiLy);
+        Task<IEnumerable<PhieuThu>> GetPhieuThuByDateRange(DateTime startDate, DateTime endDate);
+        Task<IEnumerable<PhieuThu>> GetPhieuThuByCurrentYearAndLastYear(int currentYear, int lastYear);
+        Task<long> GetTotalPhieuThuUpToMonthYear(int month, int year);
+        Task<long> GetTotalPhieuThuByYear(int year);
+        Task<long> GetToltalPhieuThuBySingleDate(DateTime date);
+        Task<PhieuThu> GetPhieuThuById(int id);
     }
 }
