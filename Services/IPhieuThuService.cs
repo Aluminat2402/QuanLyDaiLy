@@ -14,7 +14,7 @@ namespace QuanLyDaiLy.Services
         Task AddPhieuThu(PhieuThu phieuThu);
         Task<int> GenerateAvailableId();
         Task UpdatePhieuThu(PhieuThu phieuThu);
-
+        Task DeletePhieuThu(int id);
         Task<IEnumerable<PhieuThu>> GetPhieuThuByDaiLyId(int maDaiLy);
         Task<IEnumerable<PhieuThu>> GetPhieuThuByDateRange(DateTime startDate, DateTime endDate);
         Task<IEnumerable<PhieuThu>> GetPhieuThuByCurrentYearAndLastYear(int currentYear, int lastYear);
