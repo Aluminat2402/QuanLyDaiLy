@@ -76,6 +76,16 @@ namespace QuanLyDaiLy.Repositories
             await _context.SaveChangesAsync();
         }
 
+        public async Task DeletePhieuXuat(int id)
+        {
+            var phieuXuat = await _context.DsPhieuXuat.FindAsync(id);
+            if (phieuXuat != null)
+            {
+                _context.DsPhieuXuat.Remove(phieuXuat);
+                await _context.SaveChangesAsync();
+            }
+        }
+
         public async Task<int> GenerateAvailableId()
         {
             int maxId = await _context.DsPhieuXuat.MaxAsync(d => d.MaPhieuXuat);

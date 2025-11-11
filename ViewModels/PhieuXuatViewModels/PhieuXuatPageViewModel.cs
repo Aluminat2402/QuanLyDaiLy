@@ -389,5 +389,32 @@ namespace QuanLyDaiLy.ViewModels.PhieuXuatViewModels
 
             traCuuPhieuXuatWindow.Show();
         }
+
+        [RelayCommand]
+        private void DeletePhieuXuat()
+        {
+            _ = ExecuteDeletePhieuXuat();
+        }
+
+        private async Task ExecuteDeletePhieuXuat()
+        {
+            if (SelectedPhieuXuat == null!)
+            {
+                MessageBox.Show("Vui lòng chọn phiếu xuất để xoá!", "Thông báo", MessageBoxButton.OK,
+                    MessageBoxImage.Information);
+                return;
+            }
+
+            if (SelectedPhieuXuat != null)
+            {
+                var result = MessageBox.Show("Bạn có chắc chắn muốn xóa phiếu xuất này?", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.Yes)
+                {
+                    // Call the service to delete the selected PhieuXuat
+                    await _phieuXuatService.DeletePhieuXuat(SelectedPhieuXuat.MaPhieuXuat);
+                    await LoadDataAsync();
+                }
+            }
+        }
     }
 }
