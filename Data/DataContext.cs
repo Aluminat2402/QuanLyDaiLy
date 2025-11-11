@@ -12,7 +12,8 @@ public class DataContext(DbContextOptions<DataContext> options) : DbContext(opti
 {
     public DbSet<DaiLy> DsDaiLy { get; set; } = null!;
     public DbSet<LoaiDaiLy> DsLoaiDaiLy { get; set; } = null!;
-    public DbSet<Quan> DsQuan { get; set; } = null!;    
+    public DbSet<Quan> DsQuan { get; set; } = null!;
+    public DbSet<PhieuThu> DsPhieuThu { get; set; } = null!;
     public DbSet<ThamSo> DsThamSo { get; set; } = null!;
     public DbSet<MatHang> DsMatHang { get; set; } = null!;
     public DbSet<DonViTinh> DsDonViTinh { get; set; } = null!;
@@ -65,6 +66,12 @@ public class DataContext(DbContextOptions<DataContext> options) : DbContext(opti
             .HasForeignKey(m => m.MaDonViTinh)
             .OnDelete(DeleteBehavior.Cascade);
 
+        // PhieuThu (1:n) <- (1:1) DaiLy
+        modelBuilder.Entity<PhieuThu>()
+            .HasOne(p => p.DaiLy)
+            .WithMany(d => d.DsPhieuThu)
+            .HasForeignKey(p => p.MaDaiLy)
+            .OnDelete(DeleteBehavior.Cascade);
         DatabaseSeeder.Seed(modelBuilder);
     }
 }

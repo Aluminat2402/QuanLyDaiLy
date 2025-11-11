@@ -29,6 +29,7 @@ public static class ApplicationServiceExtensions
         services.AddScoped<IMatHangService, MatHangRepository>();
         services.AddScoped<IChiTietPhieuXuatService, ChiTietPhieuXuatRepository>();
         services.AddScoped<IDonViTinhService, DonViTinhRepository>();
+        services.AddScoped<IPhieuThuService, PhieuThuRepository>();
 
         // Register helpers
         services.AddSingleton<ComboBoxItemConverter>();
@@ -61,6 +62,10 @@ public static class ApplicationServiceExtensions
         services.AddTransient<DonViTinhPageViewModel>();
         services.AddTransient<ThemDonViTinhViewModel>();
         services.AddTransient<CapNhatDonViTinhViewModel>();
+
+        services.AddTransient<ViewModels.PhieuThuViewModels.PhieuThuPageViewModel>();
+        services.AddTransient<ViewModels.PhieuThuViewModels.ThemPhieuThuWindowViewModel>();
+        services.AddTransient<ViewModels.PhieuThuViewModels.TraCuuPhieuThuWindowViewModel>();
 
         services.AddSingleton<Views.MainWindow>();
 
@@ -96,6 +101,10 @@ public static class ApplicationServiceExtensions
         services.AddTransient<Views.QuanViews.QuanPage>();
         services.AddTransient<Views.QuanViews.ThemQuanWindow>();
         services.AddTransient<Views.QuanViews.CapNhatQuanWindow>();
+
+        services.AddTransient<Views.PhieuThuViews.PhieuThuPage>();
+        services.AddTransient<Views.PhieuThuViews.ThemPhieuThuWindow>();
+        services.AddTransient<Views.PhieuThuViews.TraCuuPhieuThuTienWindow>();
 
         services.AddTransient<DonViTinhPage>();
         services.AddTransient<ThemDonViTinhWindow>();
