@@ -13,6 +13,7 @@ namespace QuanLyDaiLy.Services
 
         Task AddPhieuXuat(PhieuXuat phieuXuat);
         Task UpdatePhieuXuat(PhieuXuat phieuXuat);
+        Task DeletePhieuXuat(int id);
         Task<int> GenerateAvailableId();
     }
 }

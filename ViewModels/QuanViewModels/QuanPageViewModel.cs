@@ -17,6 +17,7 @@ namespace QuanLyDaiLy.ViewModels.QuanViewModels
 {
     public partial class QuanPageViewModel :
         ObservableObject,
+        IRecipient<SearchCompletedMessage<Quan>>,
         IRecipient<DataReloadMessage>
     {
         private readonly IQuanService _quanService;
@@ -321,6 +322,15 @@ namespace QuanLyDaiLy.ViewModels.QuanViewModels
                 var pagedItems = FilteredQuans.Skip(skip).Take(ItemsPerPage);
                 DanhSachQuan = [.. pagedItems];
             }
+        }
+
+        [RelayCommand]
+        private async Task SearchQuan()
+        {
+            SelectedQuan = null!;
+
+            var traCuuQuanWindow = _serviceProvider.GetRequiredService<TraCuuQuanWindow>();
+            traCuuQuanWindow.Show();
         }
 
         [RelayCommand]

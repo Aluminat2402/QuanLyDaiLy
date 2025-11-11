@@ -1,0 +1,127 @@
+﻿<Window
+    x:Class="QuanLyDaiLy.Views.QuanViews.TraCuuQuanWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:fa="http://schemas.fontawesome.io/icons/"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Tra cứu Quận"
+    Width="600"
+    Height="335"
+    Style="{StaticResource WindowPopupStyle}"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+
+    <Border Style="{StaticResource WindowPopUpBorder}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80" />
+                <RowDefinition Height="1" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="1" />
+                <RowDefinition Height="80" />
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="1" Background="LightGray" />
+            <Border Grid.Row="3" Background="LightGray" />
+
+            <!--  Header  -->
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width=".5*" />
+                    <ColumnDefinition Width=".5*" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel
+                    Grid.Column="0"
+                    Margin="20,15,0,0"
+                    VerticalAlignment="Center">
+                    <TextBlock Style="{StaticResource WindowHeaderTextBlockStyle}" Text="Tra cứu Quận" />
+                </StackPanel>
+
+                <StackPanel
+                    Grid.Column="1"
+                    Margin="0,0,20,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center">
+                    <Button
+                        Command="{Binding CloseCommand}"
+                        Content="❌"
+                        Style="{StaticResource WindowCloseButtonStyle}" />
+                </StackPanel>
+            </Grid>
+
+            <!--  Body  -->
+            <Border Grid.Row="2" Style="{StaticResource WindowBorderContentWrapper}">
+                <Grid
+                    Height="100"
+                    Margin="10"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Top">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!--  Mã quận  -->
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="3*" />
+                            <RowDefinition Height="7*" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock
+                            Grid.Row="0"
+                            Style="{StaticResource FieldLabelTextBlockStyle}"
+                            Text="Mã quận" />
+                        <TextBox
+                            Grid.Row="1"
+                            Margin="10,10,10,20"
+                            Style="{StaticResource StandardTextBoxStyle}"
+                            Text="{Binding MaQuan}" />
+                    </Grid>
+
+                    <!--  Tên quận  -->
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="3*" />
+                            <RowDefinition Height="7*" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock
+                            Grid.Row="0"
+                            Style="{StaticResource FieldLabelTextBlockStyle}"
+                            Text="Tên quận" />
+                        <TextBox
+                            Grid.Row="1"
+                            Margin="10,10,10,20"
+                            Style="{StaticResource StandardTextBoxStyle}"
+                            Text="{Binding TenQuan}" />
+                    </Grid>
+                </Grid>
+            </Border>
+
+            <!--  Footer  -->
+            <StackPanel
+                Grid.Row="4"
+                Margin="20"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Stretch"
+                Orientation="Horizontal">
+                <Button Command="{Binding TraCuuQuanCommand}" Style="{StaticResource WindowPrimaryButtonStyle}">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:FontAwesome Margin="0,0,10,0" Icon="Search" />
+                        <TextBlock Text="Tra cứu quận" />
+                    </StackPanel>
+                </Button>
+
+                <Button Command="{Binding CloseCommand}" Style="{StaticResource WindowSignoutButtonStyle}">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:FontAwesome Margin="0,0,10,0" Icon="SignOut" />
+                        <TextBlock Text="Thoát" />
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>
