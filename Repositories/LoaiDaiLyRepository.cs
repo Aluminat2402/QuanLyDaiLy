@@ -1,12 +1,93 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using QuanLyDaiLy.Configs;
+using QuanLyDaiLy.Data;
+using QuanLyDaiLy.Models;
+using QuanLyDaiLy.Services;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using System;
 
 namespace QuanLyDaiLy.Repositories
 {
-    internal class LoaiDaiLyRepository
+    public class LoaiDaiLyRepository : ILoaiDaiLyService
     {
+        private readonly DataContext _context;
+
+        public LoaiDaiLyRepository(DatabaseConfig databaseConfig)
+        {
+            _context = databaseConfig.DataContext;
+            if (_context == null)
+            {
+                throw new ArgumentNullException(nameof(databaseConfig), "Database not initialized!");
+            }
+        }
+
+        public async Task AddLoaiDaiLy(LoaiDaiLy loaiDaiLy)
+        {
+            _context.DsLoaiDaiLy.Add(loaiDaiLy);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteLoaiDaiLy(int id)
+        {
+            var loaiDaiLy = await _context.DsLoaiDaiLy.FindAsync(id);
+            if (loaiDaiLy != null)
+            {
+                _context.DsLoaiDaiLy.Remove(loaiDaiLy);
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        public async Task<LoaiDaiLy> GetLoaiDaiLyById(int id)
+        {
+            LoaiDaiLy? loaiDaiLy = await _context.DsLoaiDaiLy.FindAsync(id);
+            return loaiDaiLy ?? throw new Exception("LoaiDaiLy not found!");
+        }
+
+        public async Task<LoaiDaiLy> GetLoaiDaiLyByTenLoaiDaiLy(string tenLoaiDaiLy)
+        {
+            LoaiDaiLy? loaiDaiLy = await _context.DsLoaiDaiLy.FirstOrDefaultAsync(l => l.TenLoaiDaiLy == tenLoaiDaiLy);
+            return loaiDaiLy ?? throw new Exception("LoaiDaiLy not found!");
+        }
+
+        public async Task UpdateLoaiDaiLy(LoaiDaiLy loaiDaiLy)
+        {
+            _context.Entry(loaiDaiLy).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+        }
+
+        async Task<IEnumerable<LoaiDaiLy>> ILoaiDaiLyService.GetAllLoaiDaiLy()
+        {
+            return await _context.DsLoaiDaiLy
+                .Include(l => l.DsDaiLy)
+                .ToListAsync();
+        }
+
+        public async Task<int> GenerateAvailableId()
+        {
+            int maxId = await _context.DsLoaiDaiLy.MaxAsync(d => d.MaLoaiDaiLy);
+            return maxId + 1;
+        }
+
+        public async Task<IEnumerable<LoaiDaiLy>> GetLoaiDaiLyPage(int offset, int size = 20)
+        {
+            return await _context.DsLoaiDaiLy
+                .Include(l => l.DsDaiLy)
+                .Skip(offset * size)
+                .Take(size)
+                .ToListAsync();
+        }
+
+        public async Task<int> GetTotalPages(int size = 20)
+        {
+            int leftover = await _context.DsLoaiDaiLy.CountAsync() % size;
+            int totalPages = await _context.DsLoaiDaiLy.CountAsync() / size;
+            if (leftover > 0)
+            {
+                totalPages++;
+            }
+            return totalPages;
+        }
     }
 }

@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace QuanLyDaiLy.Models
 {
-    internal class ThamSo
+    public class ThamSo
     {
+        [Key]
+        public int Id { get; set; } = 0;
+        public int SoLuongDaiLyToiDa { get; set; } = 0;
+        public bool QuyDinhSoLuongDaiLyToiDa { get; set; } = true;
+        public bool QuyDinhTienThuTienNo { get; set; } = true;
     }
 }

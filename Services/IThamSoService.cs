@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using QuanLyDaiLy.Models;
 using System.Threading.Tasks;
 
+using QuanLyDaiLy.Models;
+
 namespace QuanLyDaiLy.Services
-{
-    internal interface IThamSoService
-    {
-    }
+{ 
+ public interface IThamSoService
+ {
+     Task<ThamSo> GetThamSo();
+     Task UpdateThamSo(ThamSo thamSo);
+     Task<int> GenerateAvailableId();
+ }
 }

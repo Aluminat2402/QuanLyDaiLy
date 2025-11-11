@@ -29,7 +29,7 @@
                     <Border Style="{StaticResource AppLogoContainerStyle}">
                         <Image Source="pack://application:,,,/QuanLyDaiLy;component/Resources/uittogether-removebg-preview.png" Style="{StaticResource AppLogoStyle}" />
                     </Border>
-                    <TextBlock Style="{StaticResource AppTitleStyle}" Text="UIT Together" />
+                    <TextBlock Style="{StaticResource AppTitleStyle}" Text="Đồ án cuối kì" />
                 </StackPanel>
 
                 <StackPanel
@@ -185,7 +185,7 @@
                         <Button HorizontalAlignment="Stretch" Style="{StaticResource NavigationProfileButtonStyle}">
                             <StackPanel Orientation="Horizontal">
                                 <fa:FontAwesome Margin="4,0,9,0" Icon="User" />
-                                <TextBlock Text="Phan Đình Minh" />
+                                <TextBlock Text="Nhóm 2" />
                             </StackPanel>
                         </Button>
                     </Border>
@@ -414,7 +414,6 @@
                 Panel.ZIndex="1"
                 ContentRendered="MainContent_ContentRendered"
                 IsHitTestVisible="True"
-                Navigated="MainContent_Navigated"
                 NavigationUIVisibility="Hidden" />
         </Grid>
     </Grid>
