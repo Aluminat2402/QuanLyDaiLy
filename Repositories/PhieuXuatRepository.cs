@@ -86,6 +86,16 @@ namespace QuanLyDaiLy.Repositories
             }
         }
 
+        public async Task<IEnumerable<PhieuXuat>> GetPhieuXuatByDaiLyId(int maDaiLy)
+        {
+            return await _context.DsPhieuXuat
+                .Include(p => p.DaiLy)
+                .Include(p => p.DsChiTietPhieuXuat)
+                    .ThenInclude(c => c.MatHang)
+                        .ThenInclude(m => m.DonViTinh)
+                .Where(p => p.MaDaiLy == maDaiLy)
+                .ToListAsync();
+        }
         public async Task<int> GenerateAvailableId()
         {
             int maxId = await _context.DsPhieuXuat.MaxAsync(d => d.MaPhieuXuat);

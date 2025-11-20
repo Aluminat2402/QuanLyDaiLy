@@ -2,12 +2,13 @@
 using QuanLyDaiLy.Configs;
 using System;
 using System.Windows;
-
-  using Microsoft.Extensions.DependencyInjection;
-  using QuanLyDaiLy.Extensions;
-  using QuanLyDaiLy.Configs;
-  using System.Windows;
-  using QuanLyDaiLy.Data;
+using LiveChartsCore;
+using LiveChartsCore.SkiaSharpView;
+using Microsoft.Extensions.DependencyInjection;
+using QuanLyDaiLy.Extensions;
+using QuanLyDaiLy.Configs;
+using System.Windows;
+using QuanLyDaiLy.Data;
 
   namespace QuanLyDaiLy;
 
@@ -18,6 +19,7 @@ public partial class App : Application
 {
     public IServiceProvider ServiceProvider { get; private set; } = null!;
 
+    
     protected override async void OnStartup(StartupEventArgs e)
     {
         base.OnStartup(e);

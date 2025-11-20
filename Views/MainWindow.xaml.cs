@@ -124,6 +124,11 @@ namespace QuanLyDaiLy.Views
                     MainContent.Navigate(thamSoPage);
                     StackPanelTabButton.Visibility = Visibility.Hidden;
                     break;
+                case "BaoCao":
+                    var baoCaoPage = _serviceProvider.GetRequiredService<BaoCaoViews.BaoCaoChiTietPage>();
+                    MainContent.Navigate(baoCaoPage);
+                    StackPanelTabButton.Visibility = Visibility.Hidden;
+                    break;
                 default:
                     break;
             }
