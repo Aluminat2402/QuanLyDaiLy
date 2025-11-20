@@ -64,6 +64,8 @@ public static class ApplicationServiceExtensions
         services.AddTransient<ThemDonViTinhViewModel>();
         services.AddTransient<CapNhatDonViTinhViewModel>();
 
+        services.AddTransient<Views.ThamSoViews.ThamSoPage>();
+
         services.AddTransient<ViewModels.PhieuThuViewModels.PhieuThuPageViewModel>();
         services.AddTransient<ViewModels.PhieuThuViewModels.ThemPhieuThuWindowViewModel>();
         services.AddTransient<ViewModels.PhieuThuViewModels.TraCuuPhieuThuWindowViewModel>();
@@ -107,6 +109,8 @@ public static class ApplicationServiceExtensions
         services.AddTransient<Views.PhieuThuViews.PhieuThuPage>();
         services.AddTransient<Views.PhieuThuViews.ThemPhieuThuWindow>();
         services.AddTransient<Views.PhieuThuViews.TraCuuPhieuThuTienWindow>();
+
+        services.AddSingleton<ViewModels.ThamSoViewModels.ThamSoPageViewModel>();
 
         services.AddTransient<DonViTinhPage>();
         services.AddTransient<ThemDonViTinhWindow>();
