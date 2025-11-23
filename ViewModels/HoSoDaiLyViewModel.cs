@@ -1,16 +1,17 @@
-﻿using QuanLyDaiLy.Views;
-using System.Windows;
-using QuanLyDaiLy.Models;
-using System.Collections.ObjectModel;
-using QuanLyDaiLy.Services;
-using System.Text.RegularExpressions;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using QuanLyDaiLy.Messages;
+using QuanLyDaiLy.Models;
+using QuanLyDaiLy.Services;
+using QuanLyDaiLy.ViewModels.ThamSoViewModels;
+using QuanLyDaiLy.Views;
 using System;
-using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using System.Windows;
 
 namespace QuanLyDaiLy.ViewModels
 {
@@ -20,13 +21,15 @@ namespace QuanLyDaiLy.ViewModels
             IQuanService quanService,
             ILoaiDaiLyService loaiDaiLyService,
             IDaiLyService daiLyService,
-            IThamSoService thamSoService
+            IThamSoService thamSoService,
+            ThamSoPageViewModel thamSoVM
         )
         {
             _quanService = quanService;
             _loaiDaiLyService = loaiDaiLyService;
             _daiLyService = daiLyService;
             _thamSoService = thamSoService;
+            _thamSoVM = thamSoVM;
 
             _ = LoadDataAsync();
         }
@@ -36,6 +39,7 @@ namespace QuanLyDaiLy.ViewModels
         private readonly IQuanService _quanService;
         private readonly IDaiLyService _daiLyService;
         private readonly IThamSoService _thamSoService;
+        private readonly ThamSoPageViewModel _thamSoVM;
 
         #region Binding Properties
         [ObservableProperty]
@@ -146,11 +150,11 @@ namespace QuanLyDaiLy.ViewModels
                 return;
             }
 
-            var thamSo = await _thamSoService.GetThamSo();
-            var quyDinhSoLuongDaiLyToiDa = thamSo.QuyDinhSoLuongDaiLyToiDa;
+            var quyDinhSoLuongDaiLyToiDa = _thamSoVM.QuyDinhSoLuongDaiLyToiDa;
+
             if (quyDinhSoLuongDaiLyToiDa == true)
             {
-                var soLuongDaiLyToiDaTrongQuan = thamSo.SoLuongDaiLyToiDa;
+                var soLuongDaiLyToiDaTrongQuan = _thamSoVM.SoLuongDaiLyToiDa;
                 var soLuongDaiLyTrongQuan = (await _quanService.GetQuanById(SelectedQuan.MaQuan)).DsDaiLy.Count;
                 if (soLuongDaiLyTrongQuan >= soLuongDaiLyToiDaTrongQuan)
                 {

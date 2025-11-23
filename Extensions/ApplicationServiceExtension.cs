@@ -4,11 +4,12 @@ using QuanLyDaiLy.Helpers;
 using QuanLyDaiLy.Repositories;
 using QuanLyDaiLy.Services;
 using QuanLyDaiLy.ViewModels;
-using QuanLyDaiLy.ViewModels.PhieuXuatViewModels;
+using QuanLyDaiLy.ViewModels.BaoCaoViewModels;
 using QuanLyDaiLy.ViewModels.DonViTinhViewModels;
+using QuanLyDaiLy.ViewModels.PhieuXuatViewModels;
 using QuanLyDaiLy.Views;
-using QuanLyDaiLy.Views.PhieuXuatViews;
 using QuanLyDaiLy.Views.DonViTinhViews;
+using QuanLyDaiLy.Views.PhieuXuatViews;
 using System;
 
 namespace QuanLyDaiLy.Extensions;
@@ -64,17 +65,42 @@ public static class ApplicationServiceExtensions
         services.AddTransient<ThemDonViTinhViewModel>();
         services.AddTransient<CapNhatDonViTinhViewModel>();
 
+        services.AddTransient<Views.ThamSoViews.ThamSoPage>();
+
         services.AddTransient<ViewModels.PhieuThuViewModels.PhieuThuPageViewModel>();
         services.AddTransient<ViewModels.PhieuThuViewModels.ThemPhieuThuWindowViewModel>();
         services.AddTransient<ViewModels.PhieuThuViewModels.TraCuuPhieuThuWindowViewModel>();
 
         services.AddSingleton<Views.MainWindow>();
 
+        services.AddSingleton<Func<string, int, BaoCaoDoanhSoViewModel>>(sp => (month, year) =>
+        {
+            var daiLyService = sp.GetRequiredService<IDaiLyService>();
+            var phieuXuatService = sp.GetRequiredService<IPhieuXuatService>();
+
+            var vm = new BaoCaoDoanhSoViewModel(daiLyService, phieuXuatService);
+            return vm;
+        });
+
+        services.AddSingleton<Func<string, int, BaoCaoCongNoViewModel>>(sp => (month, year) =>
+        {
+            var daiLyService = sp.GetRequiredService<IDaiLyService>();
+            var phieuXuatService = sp.GetRequiredService<IPhieuXuatService>();
+            var phieuThuService = sp.GetRequiredService<IPhieuThuService>();
+
+            var vm = new BaoCaoCongNoViewModel(daiLyService, phieuXuatService, phieuThuService);
+            return vm;
+        });
+
         // Register Views
         services.AddTransient<MainWindow>();
         services.AddTransient<HoSoDaiLyWinDow>();
         services.AddTransient<ChinhSuaDaiLyWindow>();
         services.AddTransient<TraCuuDaiLyWindow>();
+
+        services.AddTransient<Views.BaoCaoViews.BaoCaoChiTietPage>();
+        services.AddTransient<Views.BaoCaoViews.BaoCaoCongNoWindow>();
+        services.AddTransient<Views.BaoCaoViews.BaoCaoDoanhSoWindow>();
 
         services.AddTransient<PhieuXuatPage>();
         services.AddTransient<ThemPhieuXuatWindow>();
@@ -108,9 +134,17 @@ public static class ApplicationServiceExtensions
         services.AddTransient<Views.PhieuThuViews.ThemPhieuThuWindow>();
         services.AddTransient<Views.PhieuThuViews.TraCuuPhieuThuTienWindow>();
 
+        services.AddSingleton<ViewModels.ThamSoViewModels.ThamSoPageViewModel>();
+
         services.AddTransient<DonViTinhPage>();
         services.AddTransient<ThemDonViTinhWindow>();
         services.AddTransient<CapNhatDonViTinhWindow>();
+
+       
+
+        services.AddTransient<ViewModels.BaoCaoViewModels.BaoCaoChiTietViewModel>();
+        services.AddTransient<ViewModels.BaoCaoViewModels.BaoCaoCongNoViewModel>();
+        services.AddTransient<ViewModels.BaoCaoViewModels.BaoCaoDoanhSoViewModel>();
 
         return services;
     }

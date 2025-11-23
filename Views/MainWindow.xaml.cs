@@ -119,6 +119,16 @@ namespace QuanLyDaiLy.Views
                     var phieuThuPage = _serviceProvider.GetRequiredService<PhieuThuViews.PhieuThuPage>();
                     MainContent.Navigate(phieuThuPage);
                     break;
+                case "ThamSo":
+                    var thamSoPage = _serviceProvider.GetRequiredService<ThamSoViews.ThamSoPage>();
+                    MainContent.Navigate(thamSoPage);
+                    StackPanelTabButton.Visibility = Visibility.Hidden;
+                    break;
+                case "BaoCao":
+                    var baoCaoPage = _serviceProvider.GetRequiredService<BaoCaoViews.BaoCaoChiTietPage>();
+                    MainContent.Navigate(baoCaoPage);
+                    StackPanelTabButton.Visibility = Visibility.Hidden;
+                    break;
                 default:
                     break;
             }

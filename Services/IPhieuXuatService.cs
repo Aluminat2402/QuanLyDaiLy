@@ -15,5 +15,7 @@ namespace QuanLyDaiLy.Services
         Task UpdatePhieuXuat(PhieuXuat phieuXuat);
         Task DeletePhieuXuat(int id);
         Task<int> GenerateAvailableId();
+
+        Task<IEnumerable<PhieuXuat>> GetPhieuXuatByDaiLyId(int maDaiLy);
     }
 }
