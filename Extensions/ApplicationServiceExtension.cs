@@ -36,6 +36,8 @@ public static class ApplicationServiceExtensions
         services.AddSingleton<ComboBoxItemConverter>();
 
         // Register ViewModels
+        services.AddTransient<ViewModels.DashboardViewModels.DashboardPageViewModel>();
+
         services.AddTransient<MainWindowViewModel>();
         services.AddTransient<HoSoDaiLyViewModel>();
         services.AddTransient<ChinhSuaDaiLyViewModel>();
@@ -93,6 +95,8 @@ public static class ApplicationServiceExtensions
         });
 
         // Register Views
+        services.AddTransient<Views.DashboardViews.DashboardPage>();
+
         services.AddTransient<MainWindow>();
         services.AddTransient<HoSoDaiLyWinDow>();
         services.AddTransient<ChinhSuaDaiLyWindow>();
