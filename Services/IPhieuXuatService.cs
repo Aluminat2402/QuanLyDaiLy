@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using QuanLyDaiLy.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using QuanLyDaiLy.Models;
+using System;
 
 namespace QuanLyDaiLy.Services
 {
@@ -10,12 +11,19 @@ namespace QuanLyDaiLy.Services
         Task<IEnumerable<PhieuXuat>> GetAllPhieuXuat();
         Task<IEnumerable<PhieuXuat>> GetPhieuXuatPage(int offset, int size = 20);
         Task<int> GetTotalPages(int size = 20);
-
         Task AddPhieuXuat(PhieuXuat phieuXuat);
         Task UpdatePhieuXuat(PhieuXuat phieuXuat);
         Task DeletePhieuXuat(int id);
+        Task<IEnumerable<PhieuXuat>> GetPhieuXuatByDaiLyId(int maDaiLy);
+        Task<IEnumerable<PhieuXuat>> GetPhieuXuatByDateRange(DateTime startDate, DateTime endDate);
         Task<int> GenerateAvailableId();
 
-        Task<IEnumerable<PhieuXuat>> GetPhieuXuatByDaiLyId(int maDaiLy);
+        Task<IEnumerable<PhieuXuat>> GetPhieuXuatByCurrentYearAndLastYear(int currentYear, int lastYear);
+
+        Task<long> GetTotalPhieuXuatByYear(int year);
+        Task<Dictionary<int, long>> GetTotalValueByDaiLyAsync(int month, int year);
+        Task<long> GetTotalPhieuXuatByCurrentMonthYear(int month, int year);
+        Task<long> GetToltalPhieuXuatBySingleDate(DateTime date);
+
     }
 }

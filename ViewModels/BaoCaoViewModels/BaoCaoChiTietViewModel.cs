@@ -1,22 +1,18 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using LiveCharts.Wpf;
+using LiveCharts;
+using System.Windows.Media;
+using QuanLyDaiLy.Views.BaoCaoViews;
+using QuanLyDaiLy.Services;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
-using LiveChartsCore;
-using LiveChartsCore.SkiaSharpView;
-using LiveChartsCore.SkiaSharpView.Painting;
-using LiveChartsCore.SkiaSharpView.WPF;
-using Microsoft.Extensions.DependencyInjection;
 using QuanLyDaiLy.Messages;
-using QuanLyDaiLy.Services;
-using QuanLyDaiLy.Views.BaoCaoViews;
-using SkiaSharp;
-using System;
+using Microsoft.Extensions.DependencyInjection;
+using System.Windows;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows;
-
+using System;
 
 namespace QuanLyDaiLy.ViewModels.BaoCaoViewModels
 {
@@ -46,10 +42,10 @@ namespace QuanLyDaiLy.ViewModels.BaoCaoViewModels
         }
 
         [ObservableProperty]
-        private ObservableCollection<ISeries> _doanhSoSeries = new ObservableCollection<ISeries>();
+        private SeriesCollection _doanhSoSeries = [];
 
         [ObservableProperty]
-        private ObservableCollection<ISeries> _congNoSeries = new ObservableCollection<ISeries>();
+        private SeriesCollection _congNoSeries = [];
 
         [ObservableProperty]
         private string[] _doanhSoLabels = null!;
@@ -66,6 +62,25 @@ namespace QuanLyDaiLy.ViewModels.BaoCaoViewModels
         private List<int> _yearOptions = [];
 
         // Tooltips for the charts
+        public DefaultTooltip DoanhSoTooltip { get; set; } = new DefaultTooltip
+        {
+            SelectionMode = TooltipSelectionMode.OnlySender,
+            FontSize = 16,
+            FontFamily = new FontFamily("Nunito"),
+            ShowTitle = true,
+            Background = new SolidColorBrush(Color.FromRgb(250, 250, 250)),
+            BorderBrush = new SolidColorBrush(Color.FromRgb(200, 200, 200))
+        };
+
+        public DefaultTooltip CongNoTooltip { get; set; } = new DefaultTooltip
+        {
+            SelectionMode = TooltipSelectionMode.OnlySender,
+            FontSize = 16,
+            FontFamily = new FontFamily("Nunito"),
+            ShowTitle = true,
+            Background = new SolidColorBrush(Color.FromRgb(250, 250, 250)),
+            BorderBrush = new SolidColorBrush(Color.FromRgb(200, 200, 200))
+        };
 
         [ObservableProperty]
         private string _selectedDoanhSoMonth = $"Tháng {DateTime.Now.Month}";
@@ -212,17 +227,18 @@ namespace QuanLyDaiLy.ViewModels.BaoCaoViewModels
 
                 // Cập nhật label và series cho biểu đồ doanh số
                 DoanhSoLabels = daiLyDoanhSoList.Select(d => d.TenDaiLy).ToArray();
-                DoanhSoSeries.Clear();
-
-                DoanhSoSeries.Add(new ColumnSeries<double>
-                {
-                    Name = "Doanh số",
-                    Values = daiLyDoanhSoList.Select(d => (double)d.TongDoanhSo).ToArray(),
-                    Fill = new LiveChartsCore.SkiaSharpView.Painting.SolidColorPaint(new SKColor(76, 175, 80)),
-                    Stroke = null
-                });
-
-
+                DoanhSoSeries = new SeriesCollection
+        {
+            new ColumnSeries
+            {
+                Title = "Doanh số",
+                Values = new ChartValues<double>(daiLyDoanhSoList.Select(d => (double)d.TongDoanhSo)),
+                DataLabels = true,
+                LabelPoint = point => point.Y.ToString("N0") + " đ",
+                Fill = new SolidColorBrush(Color.FromRgb(76, 175, 80)),
+                MaxColumnWidth = 50
+            }
+        };
             }
             catch (Exception ex)
             {
@@ -247,7 +263,7 @@ namespace QuanLyDaiLy.ViewModels.BaoCaoViewModels
                 if (daiLyList == null || !daiLyList.Any())
                 {
                     CongNoLabels = Array.Empty<string>();
-                    CongNoSeries.Clear();
+                    CongNoSeries = new SeriesCollection();
                     return;
                 }
 
@@ -291,7 +307,7 @@ namespace QuanLyDaiLy.ViewModels.BaoCaoViewModels
                 if (!filteredData.Any())
                 {
                     CongNoLabels = Array.Empty<string>();
-                    CongNoSeries.Clear();
+                    CongNoSeries = new SeriesCollection();
                     return;
                 }
 
@@ -299,17 +315,18 @@ namespace QuanLyDaiLy.ViewModels.BaoCaoViewModels
                 CongNoLabels = filteredData.Select(d => d.TenDaiLy).ToArray();
                 var sortedDebts = filteredData.Select(d => d.CongNo).ToArray();
 
-                CongNoSeries.Clear();
-
-                CongNoSeries.Add(new ColumnSeries<double>
-                {
-                    Name = "Công nợ",
-                    Values = sortedDebts.Select(x => (double)x).ToArray(),
-                    Fill = new LiveChartsCore.SkiaSharpView.Painting.SolidColorPaint(new SKColor(233, 30, 99)),
-                    Stroke = null
-                });
-
-
+                CongNoSeries = new SeriesCollection
+        {
+            new ColumnSeries
+            {
+                Title = "Công nợ",
+                Values = new ChartValues<double>(sortedDebts),
+                DataLabels = true,
+                LabelPoint = point => point.Y.ToString("N0") + " đ",
+                Fill = new SolidColorBrush(Color.FromRgb(233, 30, 99)),
+                MaxColumnWidth = 50
+            }
+        };
             }
             catch (Exception ex)
             {

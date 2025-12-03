@@ -77,11 +77,11 @@ namespace QuanLyDaiLy.Views
 
             switch (pageName)
             {
-                //case "Dashboard":
-                //    var dashboardPage = _serviceProvider.GetRequiredService<DashboardViews.DashboardPage>();
-                //    MainContent.Navigate(dashboardPage);
-                //    StackPanelTabButton.Visibility = Visibility.Hidden;
-                //    break;
+                case "Dashboard":
+                    var dashboardPage = _serviceProvider.GetRequiredService<DashboardViews.DashboardPage>();
+                    MainContent.Navigate(dashboardPage);
+                    StackPanelTabButton.Visibility = Visibility.Hidden;
+                    break;
                 case "DanhSach":
                     MainContent.Content = null;
                     StackPanelTabButton.Visibility = Visibility.Visible;

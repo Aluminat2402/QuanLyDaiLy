@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\image-removebg-preview.png" />
+    <None Remove="Resources\up.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
     <PackageReference Include="FontAwesome" Version="4.7.0" />
     <PackageReference Include="FontAwesome.WPF" Version="4.7.0.9" />
@@ -20,6 +25,11 @@
 
   <ItemGroup>
     <Folder Include="ViewModels\PhieuThuViewModels\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\image-removebg-preview.png" />
+    <Resource Include="Resources\up.png" />
   </ItemGroup>
 
 </Project>
