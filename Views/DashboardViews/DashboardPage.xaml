@@ -1,0 +1,1238 @@
+﻿<Page
+    x:Class="QuanLyDaiLy.Views.DashboardViews.DashboardPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:fa="http://schemas.fontawesome.io/icons/"
+    xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="8000"
+    d:DesignWidth="1920"
+    Background="#F7F9FD"
+    mc:Ignorable="d">
+
+    <Border Style="{StaticResource PageBorderWrapper}">
+        <Grid
+            MaxWidth="1500"
+            Margin="0,0,0,5"
+            HorizontalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="150" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid
+                Grid.Row="0"
+                Margin="15,15,15,0"
+                HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*" />
+                    <ColumnDefinition Width="5*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Style="{StaticResource PageHeaderTextBlockStyle}" Text="Bảng điều khiển" />
+
+                <StackPanel
+                    Grid.Column="1"
+                    Margin="0,0,20,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Orientation="Horizontal">
+                    <Button
+                        HorizontalAlignment="Center"
+                        Click="RefreshButton_Click"
+                        Style="{StaticResource PrimaryButtonStyle}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:FontAwesome
+                                Margin="0,0,8,0"
+                                VerticalAlignment="Center"
+                                Icon="Refresh" />
+                            <TextBlock VerticalAlignment="Center" Text="Tải lại Widget" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </Grid>
+
+            <Border
+                Grid.Row="1"
+                Margin="20,10,20,20"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch">
+                <ScrollViewer PanningMode="VerticalOnly" VerticalScrollBarVisibility="Hidden">
+                    <WrapPanel HorizontalAlignment="Stretch" Orientation="Horizontal">
+
+                        <Border Style="{StaticResource ThirdBorderWidget}">
+                            <Grid Margin="20">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="114*" />
+                                    <ColumnDefinition Width="181*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="5*" />
+                                    <RowDefinition Height="5*" />
+                                </Grid.RowDefinitions>
+
+                                <Grid Grid.Row="0" Grid.ColumnSpan="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="9*" />
+                                        <ColumnDefinition Width="1*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock
+                                        Grid.Column="0"
+                                        Style="{StaticResource SmallWidgetTextBlockStyle}"
+                                        Text="Doanh thu trong ngày" />
+
+                                    <Button
+                                        Grid.Column="1"
+                                        Click="HideBorderButton_Click"
+                                        Style="{StaticResource CloseSmallWidgetButtonStyle}" />
+                                </Grid>
+
+                                <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="65*" />
+                                        <ColumnDefinition Width="35*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock
+                                        Grid.Column="0"
+                                        Style="{StaticResource SmallWidgetContentTextBlockStyle}"
+                                        Text="{Binding WidgetDoanhThuTrongNgay}" />
+
+                                    <StackPanel
+                                        Grid.Column="1"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        Orientation="Horizontal">
+                                        <TextBlock
+                                            FontFamily="Font Family"
+                                            FontSize="20"
+                                            FontWeight="Regular"
+                                            LineHeight="16"
+                                            Text="{Binding WidgetDoanhThuTrongNgayDeltaText}" />
+                                        <Image
+                                            Width="20"
+                                            Height="20"
+                                            Margin="5,0,0,0"
+                                            VerticalAlignment="Center">
+                                            <Image.Style>
+                                                <Style TargetType="Image">
+                                                    <!--  Mặc định là mũi tên lên  -->
+                                                    <Setter Property="Source" Value="/Resources/up.png" />
+                                                    <Style.Triggers>
+                                                        <!--  Nếu WidgetPhiXuatIsUp == False thì chuyển sang mũi tên xuống  -->
+                                                        <DataTrigger Binding="{Binding WidgetDoanhThuTrongNgayIsUp}" Value="False">
+                                                            <Setter Property="Source" Value="/Resources/image-removebg-preview.png" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Image.Style>
+                                        </Image>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                        <Border Style="{StaticResource ThirdBorderWidget}">
+                            <Grid Margin="20">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="114*" />
+                                    <ColumnDefinition Width="181*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="5*" />
+                                    <RowDefinition Height="5*" />
+                                </Grid.RowDefinitions>
+
+                                <Grid Grid.Row="0" Grid.ColumnSpan="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="9*" />
+                                        <ColumnDefinition Width="1*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock
+                                        Grid.Column="0"
+                                        Style="{StaticResource SmallWidgetTextBlockStyle}"
+                                        Text="Doanh thu trong tháng" />
+
+                                    <Button
+                                        Grid.Column="1"
+                                        Click="HideBorderButton_Click"
+                                        Style="{StaticResource CloseSmallWidgetButtonStyle}" />
+                                </Grid>
+
+                                <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="65*" />
+                                        <ColumnDefinition Width="35*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock
+                                        Grid.Column="0"
+                                        Style="{StaticResource SmallWidgetContentTextBlockStyle}"
+                                        Text="{Binding WidgetDoanhThuThang}" />
+
+                                    <StackPanel
+                                        Grid.Column="1"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        Orientation="Horizontal">
+                                        <TextBlock
+                                            FontFamily="Font Family"
+                                            FontSize="20"
+                                            FontWeight="Regular"
+                                            LineHeight="16"
+                                            Text="{Binding WidgetDoanhThuThangDeltaText}" />
+                                        <Image
+                                            Width="20"
+                                            Height="20"
+                                            Margin="5,0,0,0"
+                                            VerticalAlignment="Center">
+                                            <Image.Style>
+                                                <Style TargetType="Image">
+                                                    <!--  Mặc định là mũi tên lên  -->
+                                                    <Setter Property="Source" Value="/Resources/up.png" />
+                                                    <Style.Triggers>
+                                                        <!--  Nếu WidgetPhiXuatIsUp == False thì chuyển sang mũi tên xuống  -->
+                                                        <DataTrigger Binding="{Binding WidgetDoanhThuThangIsUp}" Value="False">
+                                                            <Setter Property="Source" Value="/Resources/image-removebg-preview.png" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Image.Style>
+                                        </Image>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                        <Border Style="{StaticResource ThirdBorderWidget}">
+                            <Grid Margin="20">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="114*" />
+                                    <ColumnDefinition Width="181*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="5*" />
+                                    <RowDefinition Height="5*" />
+                                </Grid.RowDefinitions>
+
+                                <Grid Grid.Row="0" Grid.ColumnSpan="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="9*" />
+                                        <ColumnDefinition Width="1*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock
+                                        Grid.Column="0"
+                                        Margin="0,0,0,0"
+                                        Style="{StaticResource SmallWidgetTextBlockStyle}"
+                                        Text="Doanh thu trong năm" />
+
+                                    <Button
+                                        Grid.Column="1"
+                                        Click="HideBorderButton_Click"
+                                        Style="{StaticResource CloseSmallWidgetButtonStyle}" />
+                                </Grid>
+
+                                <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="65*" />
+                                        <ColumnDefinition Width="35*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock
+                                        Grid.Column="0"
+                                        Style="{StaticResource SmallWidgetContentTextBlockStyle}"
+                                        Text="{Binding WidgetDoanhThuTrongNam}" />
+
+                                    <StackPanel
+                                        Grid.Column="1"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        Orientation="Horizontal">
+                                        <TextBlock
+                                            FontFamily="Font Family"
+                                            FontSize="20"
+                                            FontWeight="Regular"
+                                            LineHeight="16"
+                                            Text="{Binding WidgetDoanhThuTrongNamDeltaText}" />
+                                        <Image
+                                            Width="20"
+                                            Height="20"
+                                            Margin="5,0,0,0"
+                                            VerticalAlignment="Center">
+                                            <Image.Style>
+                                                <Style TargetType="Image">
+                                                    <!--  Mặc định là mũi tên lên  -->
+                                                    <Setter Property="Source" Value="/Resources/up.png" />
+                                                    <Style.Triggers>
+                                                        <!--  Nếu WidgetPhiXuatIsUp == False thì chuyển sang mũi tên xuống  -->
+                                                        <DataTrigger Binding="{Binding WidgetDoanhThuTrongNamIsUp}" Value="False">
+                                                            <Setter Property="Source" Value="/Resources/image-removebg-preview.png" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Image.Style>
+                                        </Image>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                        </Border>
+
+                        <Border Style="{StaticResource BigBorderWidget}">
+                            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="15*" />
+                                    <RowDefinition Height="85*" />
+                                </Grid.RowDefinitions>
+                                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="97*" />
+                                        <ColumnDefinition Width="4*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock
+                                        Grid.Row="0"
+                                        Style="{StaticResource BigWidgetTextBlockStyle}"
+                                        Text="Doanh thu theo tháng" />
+
+                                    <!--  Add to fit in here  -->
+                                    <StackPanel
+                                        Grid.Column="0"
+                                        Margin="0,10,10,15"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        Orientation="Horizontal">
+                                        <Grid Width="120" Margin="0,0,15,0">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+
+                                            <TextBlock
+                                                Grid.Row="0"
+                                                Style="{StaticResource FieldSmallLabelTextBlockStyle}"
+                                                Text="Tháng" />
+                                            <ComboBox
+                                                Grid.Row="1"
+                                                Height="25"
+                                                Margin="0"
+                                                ItemsSource="{Binding MonthOptions}"
+                                                SelectedItem="{Binding RevenueChartMonth}"
+                                                Style="{StaticResource SmallComboBoxStyle}" />
+                                        </Grid>
+
+                                        <Grid Width="130">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+
+                                            <TextBlock
+                                                Grid.Row="0"
+                                                Style="{StaticResource FieldSmallLabelTextBlockStyle}"
+                                                Text="Năm" />
+                                            <ComboBox
+                                                Grid.Row="1"
+                                                Height="25"
+                                                Margin="0"
+                                                ItemsSource="{Binding YearOptions}"
+                                                SelectedItem="{Binding RevenueChartYear}"
+                                                Style="{StaticResource SmallComboBoxStyle}" />
+                                        </Grid>
+                                    </StackPanel>
+
+                                    <Button
+                                        Grid.Column="1"
+                                        Click="HideBorderButton_Click"
+                                        Style="{StaticResource CloseWidgetButtonStyle}" />
+                                </Grid>
+
+
+                                <lvc:CartesianChart
+                                    Grid.Row="1"
+                                    Margin="10"
+                                    DataTooltip="{Binding Tooltip}"
+                                    DisableAnimations="False"
+                                    Hoverable="True"
+                                    LegendLocation="Top"
+                                    Series="{Binding SpendingSeries}">
+
+                                    <lvc:CartesianChart.AxisX>
+                                        <lvc:Axis
+                                            FontFamily="Nunito"
+                                            FontSize="14"
+                                            Labels="{Binding MonthLabels}">
+                                            <lvc:Axis.Separator>
+                                                <lvc:Separator IsEnabled="False" Step="1" />
+                                            </lvc:Axis.Separator>
+                                        </lvc:Axis>
+                                    </lvc:CartesianChart.AxisX>
+
+                                    <lvc:CartesianChart.AxisY>
+                                        <lvc:Axis
+                                            FontFamily="Nunito"
+                                            FontSize="14"
+                                            LabelFormatter="{Binding CurrencyFormatter}"
+                                            MinValue="0">
+                                            <lvc:Axis.Separator>
+                                                <lvc:Separator Step="{Binding YAxisStepLineChart}" />
+                                            </lvc:Axis.Separator>
+                                        </lvc:Axis>
+                                    </lvc:CartesianChart.AxisY>
+
+                                    <lvc:CartesianChart.ChartLegend>
+                                        <lvc:DefaultLegend FontFamily="Nunito" FontSize="14" />
+                                    </lvc:CartesianChart.ChartLegend>
+                                </lvc:CartesianChart>
+                            </Grid>
+                        </Border>
+
+                        <Border Background="#EDEEFC" Style="{StaticResource ThirdBorderWidget}">
+                            <Grid Margin="20">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="114*" />
+                                    <ColumnDefinition Width="181*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="5*" />
+                                    <RowDefinition Height="5*" />
+                                </Grid.RowDefinitions>
+
+                                <Grid Grid.Row="0" Grid.ColumnSpan="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="9*" />
+                                        <ColumnDefinition Width="1*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock
+                                        Grid.Column="0"
+                                        Style="{StaticResource SmallWidgetTextBlockStyle}"
+                                        Text="Doanh số trong ngày" />
+
+                                    <Button
+                                        Grid.Column="1"
+                                        Click="HideBorderButton_Click"
+                                        Style="{StaticResource CloseSmallWidgetButtonStyle}" />
+                                </Grid>
+
+                                <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="65*" />
+                                        <ColumnDefinition Width="35*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock
+                                        Grid.Column="0"
+                                        Style="{StaticResource SmallWidgetContentTextBlockStyle}"
+                                        Text="{Binding WidgetDoanhSoTrongNgay}" />
+
+                                    <StackPanel
+                                        Grid.Column="1"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        Orientation="Horizontal">
+                                        <TextBlock
+                                            FontFamily="Font Family"
+                                            FontSize="20"
+                                            FontWeight="Regular"
+                                            LineHeight="16"
+                                            Text="{Binding WidgetDoanhSoTrongNgayDeltaText}" />
+                                        <Image
+                                            Width="20"
+                                            Height="20"
+                                            Margin="5,0,0,0"
+                                            VerticalAlignment="Center">
+                                            <Image.Style>
+                                                <Style TargetType="Image">
+                                                    <!--  Mặc định là mũi tên lên  -->
+                                                    <Setter Property="Source" Value="/Resources/up.png" />
+                                                    <Style.Triggers>
+                                                        <!--  Nếu WidgetPhiXuatIsUp == False thì chuyển sang mũi tên xuống  -->
+                                                        <DataTrigger Binding="{Binding WidgetDoanhSoTrongNgayIsUp}" Value="False">
+                                                            <Setter Property="Source" Value="/Resources/image-removebg-preview.png" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Image.Style>
+                                        </Image>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                        <Border Background="#EDEEFC" Style="{StaticResource ThirdBorderWidget}">
+                            <Grid Margin="20">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="114*" />
+                                    <ColumnDefinition Width="181*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="5*" />
+                                    <RowDefinition Height="5*" />
+                                </Grid.RowDefinitions>
+
+                                <Grid Grid.Row="0" Grid.ColumnSpan="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="9*" />
+                                        <ColumnDefinition Width="1*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock
+                                        Grid.Column="0"
+                                        Style="{StaticResource SmallWidgetTextBlockStyle}"
+                                        Text="Doanh số trong tháng" />
+
+                                    <Button
+                                        Grid.Column="1"
+                                        Click="HideBorderButton_Click"
+                                        Style="{StaticResource CloseSmallWidgetButtonStyle}" />
+                                </Grid>
+
+                                <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="65*" />
+                                        <ColumnDefinition Width="35*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock
+                                        Grid.Column="0"
+                                        Style="{StaticResource SmallWidgetContentTextBlockStyle}"
+                                        Text="{Binding WidgetDoanhSoTrongThang}" />
+
+                                    <StackPanel
+                                        Grid.Column="1"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        Orientation="Horizontal">
+                                        <TextBlock
+                                            FontFamily="Font Family"
+                                            FontSize="20"
+                                            FontWeight="Regular"
+                                            LineHeight="16"
+                                            Text="{Binding WidgetDoanhSoTrongThangDeltaText}" />
+                                        <Image
+                                            Width="20"
+                                            Height="20"
+                                            Margin="5,0,0,0"
+                                            VerticalAlignment="Center">
+                                            <Image.Style>
+                                                <Style TargetType="Image">
+                                                    <!--  Mặc định là mũi tên lên  -->
+                                                    <Setter Property="Source" Value="/Resources/up.png" />
+                                                    <Style.Triggers>
+                                                        <!--  Nếu WidgetPhiXuatIsUp == False thì chuyển sang mũi tên xuống  -->
+                                                        <DataTrigger Binding="{Binding WidgetDoanhSoTrongThangIsUp}" Value="False">
+                                                            <Setter Property="Source" Value="/Resources/image-removebg-preview.png" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Image.Style>
+                                        </Image>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                        <Border Background="#EDEEFC" Style="{StaticResource ThirdBorderWidget}">
+                            <Grid Margin="20">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="114*" />
+                                    <ColumnDefinition Width="181*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="5*" />
+                                    <RowDefinition Height="5*" />
+                                </Grid.RowDefinitions>
+
+                                <Grid Grid.Row="0" Grid.ColumnSpan="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="9*" />
+                                        <ColumnDefinition Width="1*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock
+                                        Grid.Column="0"
+                                        Margin="0,0,0,0"
+                                        Style="{StaticResource SmallWidgetTextBlockStyle}"
+                                        Text="Doanh số trong năm" />
+
+                                    <Button
+                                        Grid.Column="1"
+                                        Click="HideBorderButton_Click"
+                                        Style="{StaticResource CloseSmallWidgetButtonStyle}" />
+                                </Grid>
+
+                                <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="65*" />
+                                        <ColumnDefinition Width="35*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock
+                                        Grid.Column="0"
+                                        Style="{StaticResource SmallWidgetContentTextBlockStyle}"
+                                        Text="{Binding WidgetDoanhSoTrongNam}" />
+
+                                    <StackPanel
+                                        Grid.Column="1"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        Orientation="Horizontal">
+                                        <TextBlock
+                                            FontFamily="Font Family"
+                                            FontSize="20"
+                                            FontWeight="Regular"
+                                            LineHeight="16"
+                                            Text="{Binding WidgetDoanhSoTrongNamDeltaText}" />
+                                        <Image
+                                            Width="20"
+                                            Height="20"
+                                            Margin="5,0,0,0"
+                                            VerticalAlignment="Center">
+                                            <Image.Style>
+                                                <Style TargetType="Image">
+                                                    <!--  Mặc định là mũi tên lên  -->
+                                                    <Setter Property="Source" Value="/Resources/up.png" />
+                                                    <Style.Triggers>
+                                                        <!--  Nếu WidgetPhiXuatIsUp == False thì chuyển sang mũi tên xuống  -->
+                                                        <DataTrigger Binding="{Binding WidgetDoanhSoTrongNamIsUp}" Value="False">
+                                                            <Setter Property="Source" Value="/Resources/image-removebg-preview.png" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Image.Style>
+                                        </Image>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                        </Border>
+
+                        <Border Style="{StaticResource BigBorderWidget}">
+                            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="15*" />
+                                    <RowDefinition Height="85*" />
+                                </Grid.RowDefinitions>
+                                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="97*" />
+                                        <ColumnDefinition Width="4*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock
+                                        Grid.Row="0"
+                                        Style="{StaticResource BigWidgetTextBlockStyle}"
+                                        Text="Doanh số theo tháng" />
+
+                                    <!--  Add to fit in here  -->
+                                    <StackPanel
+                                        Grid.Column="0"
+                                        Margin="0,10,10,15"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        Orientation="Horizontal">
+                                        <Grid Width="120" Margin="0,0,15,0">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+
+                                            <TextBlock
+                                                Grid.Row="0"
+                                                Style="{StaticResource FieldSmallLabelTextBlockStyle}"
+                                                Text="Tháng" />
+                                            <ComboBox
+                                                Grid.Row="1"
+                                                Height="25"
+                                                Margin="0"
+                                                ItemsSource="{Binding MonthOptions}"
+                                                SelectedItem="{Binding DoanhSoChartMonth}"
+                                                Style="{StaticResource SmallComboBoxStyle}" />
+                                        </Grid>
+
+                                        <Grid Width="130">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+
+                                            <TextBlock
+                                                Grid.Row="0"
+                                                Style="{StaticResource FieldSmallLabelTextBlockStyle}"
+                                                Text="Năm" />
+                                            <ComboBox
+                                                Grid.Row="1"
+                                                Height="25"
+                                                Margin="0"
+                                                ItemsSource="{Binding YearOptions}"
+                                                SelectedItem="{Binding DoanhSoChartYear}"
+                                                Style="{StaticResource SmallComboBoxStyle}" />
+                                        </Grid>
+                                    </StackPanel>
+
+                                    <Button
+                                        Grid.Column="1"
+                                        Click="HideBorderButton_Click"
+                                        Style="{StaticResource CloseWidgetButtonStyle}" />
+                                </Grid>
+
+
+                                <lvc:CartesianChart
+                                    Grid.Row="1"
+                                    Margin="10"
+                                    DataTooltip="{Binding DoanhSoToolTip}"
+                                    DisableAnimations="False"
+                                    Hoverable="True"
+                                    LegendLocation="Top"
+                                    Series="{Binding DoanhSoSeries}">
+
+                                    <lvc:CartesianChart.AxisX>
+                                        <lvc:Axis
+                                            FontFamily="Nunito"
+                                            FontSize="14"
+                                            Labels="{Binding MonthLabels}">
+                                            <lvc:Axis.Separator>
+                                                <lvc:Separator IsEnabled="False" Step="1" />
+                                            </lvc:Axis.Separator>
+                                        </lvc:Axis>
+                                    </lvc:CartesianChart.AxisX>
+
+                                    <lvc:CartesianChart.AxisY>
+                                        <lvc:Axis
+                                            FontFamily="Nunito"
+                                            FontSize="14"
+                                            LabelFormatter="{Binding CurrencyFormatter}"
+                                            MinValue="0">
+                                            <lvc:Axis.Separator>
+                                                <lvc:Separator Step="{Binding YAxisStepDoanhSoChart}" />
+                                            </lvc:Axis.Separator>
+                                        </lvc:Axis>
+                                    </lvc:CartesianChart.AxisY>
+
+                                    <lvc:CartesianChart.ChartLegend>
+                                        <lvc:DefaultLegend FontFamily="Nunito" FontSize="14" />
+                                    </lvc:CartesianChart.ChartLegend>
+                                </lvc:CartesianChart>
+                            </Grid>
+                        </Border>
+
+                        <Border Background="#FCEDF8" Style="{StaticResource ThirdBorderWidget}">
+                            <Grid Margin="20">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="114*" />
+                                    <ColumnDefinition Width="181*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="5*" />
+                                    <RowDefinition Height="5*" />
+                                </Grid.RowDefinitions>
+
+                                <Grid Grid.Row="0" Grid.ColumnSpan="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="9*" />
+                                        <ColumnDefinition Width="1*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock
+                                        Grid.Column="0"
+                                        Style="{StaticResource SmallWidgetTextBlockStyle}"
+                                        Text="Tổng công nợ đầu tháng" />
+
+                                    <Button
+                                        Grid.Column="1"
+                                        Click="HideBorderButton_Click"
+                                        Style="{StaticResource CloseSmallWidgetButtonStyle}" />
+                                </Grid>
+
+                                <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="65*" />
+                                        <ColumnDefinition Width="35*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock
+                                        Grid.Column="0"
+                                        Style="{StaticResource SmallWidgetContentTextBlockStyle}"
+                                        Text="{Binding WidgetTongCongNoDauThang}" />
+
+                                    <StackPanel
+                                        Grid.Column="1"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        Orientation="Horizontal">
+                                        <TextBlock
+                                            FontFamily="Font Family"
+                                            FontSize="20"
+                                            FontWeight="Regular"
+                                            LineHeight="16"
+                                            Text="{Binding WidgetTongCongNoDauThangDeltaText}" />
+                                        <Image
+                                            Width="20"
+                                            Height="20"
+                                            Margin="5,0,0,0"
+                                            VerticalAlignment="Center">
+                                            <Image.Style>
+                                                <Style TargetType="Image">
+                                                    <!--  Mặc định là mũi tên lên  -->
+                                                    <Setter Property="Source" Value="/Resources/up.png" />
+                                                    <Style.Triggers>
+                                                        <!--  Nếu WidgetPhiXuatIsUp == False thì chuyển sang mũi tên xuống  -->
+                                                        <DataTrigger Binding="{Binding WidgetTongCongNoDauThangIsUp}" Value="False">
+                                                            <Setter Property="Source" Value="/Resources/image-removebg-preview.png" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Image.Style>
+                                        </Image>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                        <Border Background="#FCEDF8" Style="{StaticResource ThirdBorderWidget}">
+                            <Grid Margin="20">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="114*" />
+                                    <ColumnDefinition Width="181*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="5*" />
+                                    <RowDefinition Height="5*" />
+                                </Grid.RowDefinitions>
+
+                                <Grid Grid.Row="0" Grid.ColumnSpan="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="9*" />
+                                        <ColumnDefinition Width="1*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock
+                                        Grid.Column="0"
+                                        Style="{StaticResource SmallWidgetTextBlockStyle}"
+                                        Text="{Binding WidgetTongNoCuoiThangText}" />
+
+                                    <Button
+                                        Grid.Column="1"
+                                        Click="HideBorderButton_Click"
+                                        Style="{StaticResource CloseSmallWidgetButtonStyle}" />
+                                </Grid>
+
+                                <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="65*" />
+                                        <ColumnDefinition Width="35*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock
+                                        Grid.Column="0"
+                                        Style="{StaticResource SmallWidgetContentTextBlockStyle}"
+                                        Text="{Binding WidgetTongCongNoCuoiThang}" />
+
+                                    <StackPanel
+                                        Grid.Column="1"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        Orientation="Horizontal">
+                                        <TextBlock
+                                            FontFamily="Font Family"
+                                            FontSize="20"
+                                            FontWeight="Regular"
+                                            LineHeight="16"
+                                            Text="{Binding WidgetTongCongNoCuoiThangDeltaText}" />
+                                        <Image
+                                            Width="20"
+                                            Height="20"
+                                            Margin="5,0,0,0"
+                                            VerticalAlignment="Center">
+                                            <Image.Style>
+                                                <Style TargetType="Image">
+                                                    <!--  Mặc định là mũi tên lên  -->
+                                                    <Setter Property="Source" Value="/Resources/up.png" />
+                                                    <Style.Triggers>
+                                                        <!--  Nếu WidgetPhiXuatIsUp == False thì chuyển sang mũi tên xuống  -->
+                                                        <DataTrigger Binding="{Binding WidgetTongCongNoCuoiThangIsUp}" Value="False">
+                                                            <Setter Property="Source" Value="/Resources/image-removebg-preview.png" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Image.Style>
+                                        </Image>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                        <Border Background="#FCEDF8" Style="{StaticResource ThirdBorderWidget}">
+                            <Grid Margin="20">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="114*" />
+                                    <ColumnDefinition Width="181*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="5*" />
+                                    <RowDefinition Height="5*" />
+                                </Grid.RowDefinitions>
+
+                                <Grid Grid.Row="0" Grid.ColumnSpan="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="9*" />
+                                        <ColumnDefinition Width="1*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock
+                                        Grid.Column="0"
+                                        Margin="0,0,0,0"
+                                        Style="{StaticResource SmallWidgetTextBlockStyle}"
+                                        Text="Số lượng Đại lý đang nợ" />
+
+                                    <Button
+                                        Grid.Column="1"
+                                        Click="HideBorderButton_Click"
+                                        Style="{StaticResource CloseSmallWidgetButtonStyle}" />
+                                </Grid>
+
+                                <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="65*" />
+                                        <ColumnDefinition Width="35*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock
+                                        Grid.Column="0"
+                                        Style="{StaticResource SmallWidgetContentTextBlockStyle}"
+                                        Text="{Binding WidgetSoLuongDaiLyDangNo}" />
+
+                                    <StackPanel
+                                        Grid.Column="1"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        Orientation="Horizontal">
+                                        <TextBlock
+                                            FontFamily="Font Family"
+                                            FontSize="20"
+                                            FontWeight="Regular"
+                                            LineHeight="16"
+                                            Text="{Binding WidgetSoLuongDaiLyDangNoDeltaText}" />
+                                        <Image
+                                            Width="20"
+                                            Height="20"
+                                            Margin="5,0,0,0"
+                                            VerticalAlignment="Center">
+                                            <Image.Style>
+                                                <Style TargetType="Image">
+                                                    <!--  Mặc định là mũi tên lên  -->
+                                                    <Setter Property="Source" Value="/Resources/up.png" />
+                                                    <Style.Triggers>
+                                                        <!--  Nếu WidgetPhiXuatIsUp == False thì chuyển sang mũi tên xuống  -->
+                                                        <DataTrigger Binding="{Binding WidgetSoLuongDaiLyDangNoIsUp}" Value="False">
+                                                            <Setter Property="Source" Value="/Resources/image-removebg-preview.png" />
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Image.Style>
+                                        </Image>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                        </Border>
+
+                        <Border Height="400" Style="{StaticResource BigBorderWidget}">
+                            <Grid
+                                Margin="15,10"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="75" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <Grid
+                                    Grid.Row="0"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="97*" />
+                                        <ColumnDefinition Width="4*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock
+                                        Grid.Column="0"
+                                        Style="{StaticResource BigWidgetTextBlockStyle}"
+                                        Text="Thống kê công nợ trong tháng" />
+
+                                    <StackPanel
+                                        Grid.Column="0"
+                                        Margin="0,10,10,15"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        Orientation="Horizontal">
+                                        <Grid Width="120" Margin="0,0,15,0">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+
+                                            <TextBlock
+                                                Grid.Row="0"
+                                                Style="{StaticResource FieldSmallLabelTextBlockStyle}"
+                                                Text="Tháng" />
+                                            <ComboBox
+                                                Grid.Row="1"
+                                                Height="25"
+                                                Margin="0"
+                                                ItemsSource="{Binding MonthOptions}"
+                                                SelectedItem="{Binding DebtChartMonth}"
+                                                Style="{StaticResource SmallComboBoxStyle}" />
+                                        </Grid>
+
+                                        <Grid Width="130">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+
+                                            <TextBlock
+                                                Grid.Row="0"
+                                                Style="{StaticResource FieldSmallLabelTextBlockStyle}"
+                                                Text="Năm" />
+                                            <ComboBox
+                                                Grid.Row="1"
+                                                Height="25"
+                                                Margin="0"
+                                                ItemsSource="{Binding YearOptions}"
+                                                SelectedItem="{Binding DebtChartYear, Mode=TwoWay}"
+                                                Style="{StaticResource SmallComboBoxStyle}" />
+                                        </Grid>
+                                    </StackPanel>
+
+                                    <Button
+                                        Grid.Column="1"
+                                        Click="HideBorderButton_Click"
+                                        Style="{StaticResource CloseWidgetButtonStyle}" />
+                                </Grid>
+
+                                <!--  Add column chart for DaiLy with highest Tiền nợ  -->
+                                <lvc:CartesianChart
+                                    Grid.Row="1"
+                                    Margin="10"
+                                    DataTooltip="{Binding DebtColumnTooltip}"
+                                    DisableAnimations="False"
+                                    Hoverable="True"
+                                    LegendLocation="None"
+                                    Series="{Binding TopDebtDaiLySeries}">
+
+                                    <lvc:CartesianChart.AxisX>
+                                        <lvc:Axis
+                                            FontFamily="Nunito"
+                                            FontSize="12"
+                                            Labels="{Binding TopDebtDaiLyLabels}">
+                                            <lvc:Axis.Separator>
+                                                <lvc:Separator IsEnabled="False" Step="1" />
+                                            </lvc:Axis.Separator>
+                                        </lvc:Axis>
+                                    </lvc:CartesianChart.AxisX>
+                                    <!--  đã sửa chỗ này  -->
+                                    <lvc:CartesianChart.AxisY>
+                                        <lvc:Axis
+                                            FontFamily="Nunito"
+                                            FontSize="14"
+                                            LabelFormatter="{Binding CurrencyFormatter}"
+                                            MinValue="0">
+                                            <lvc:Axis.Separator>
+                                                <lvc:Separator Step="{Binding YAxisStepDebtColumnChart}" />
+                                            </lvc:Axis.Separator>
+                                        </lvc:Axis>
+                                    </lvc:CartesianChart.AxisY>
+                                </lvc:CartesianChart>
+                            </Grid>
+                        </Border>
+
+                        <Border Style="{StaticResource HalfSmallWidgetLeft}">
+                            <Grid
+                                Margin="15,10"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="75" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="97*" />
+                                        <ColumnDefinition Width="4*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock
+                                        Grid.Column="0"
+                                        Margin="0"
+                                        Style="{StaticResource BigWidgetTextBlockStyle}">
+                                        <Run Text="Số lượng Đại lý" />
+                                        <LineBreak />
+                                        <Run Text="theo từng Loại đại lý" />
+                                    </TextBlock>
+
+                                    <StackPanel
+                                        Grid.Column="0"
+                                        Margin="0,10,10,15"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        Orientation="Horizontal">
+                                        <Grid Width="120" Margin="0,0,15,0">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+
+                                            <TextBlock
+                                                Grid.Row="0"
+                                                Style="{StaticResource FieldSmallLabelTextBlockStyle}"
+                                                Text="Tháng" />
+                                            <ComboBox
+                                                Grid.Row="1"
+                                                Height="25"
+                                                Margin="0"
+                                                ItemsSource="{Binding MonthOptions}"
+                                                SelectedItem="{Binding PieChartMonth}"
+                                                Style="{StaticResource SmallComboBoxStyle}" />
+                                        </Grid>
+
+                                        <Grid Width="130">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+
+                                            <TextBlock
+                                                Grid.Row="0"
+                                                Style="{StaticResource FieldSmallLabelTextBlockStyle}"
+                                                Text="Năm" />
+                                            <ComboBox
+                                                Grid.Row="1"
+                                                Height="25"
+                                                Margin="0"
+                                                ItemsSource="{Binding YearOptions}"
+                                                SelectedItem="{Binding PieChartYear, Mode=TwoWay}"
+                                                Style="{StaticResource SmallComboBoxStyle}" />
+                                        </Grid>
+                                    </StackPanel>
+
+                                    <Button
+                                        Grid.Column="1"
+                                        Click="HideBorderButton_Click"
+                                        Style="{StaticResource CloseWidgetButtonStyle}" />
+                                </Grid>
+
+                                <lvc:PieChart
+                                    Grid.Row="1"
+                                    Margin="10"
+                                    DataTooltip="{Binding PieTooltip}"
+                                    FontFamily="Nunito"
+                                    FontSize="18"
+                                    Hoverable="True"
+                                    InnerRadius="0"
+                                    LegendLocation="Right"
+                                    Series="{Binding DaiLyDistributionSeries}">
+                                    <lvc:PieChart.ChartLegend>
+                                        <lvc:DefaultLegend FontFamily="Nunito" FontSize="18" />
+                                    </lvc:PieChart.ChartLegend>
+                                </lvc:PieChart>
+                            </Grid>
+                        </Border>
+
+                        <Border Style="{StaticResource HalfSmallWidgetLeft}">
+                            <Grid
+                                Margin="15,10"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="75" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="97*" />
+                                        <ColumnDefinition Width="4*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock
+                                        Grid.Column="0"
+                                        Margin="0"
+                                        Style="{StaticResource BigWidgetTextBlockStyle}">
+                                        <Run Text="Số lượng Đại lý" />
+                                        <LineBreak />
+                                        <Run Text="theo từng Quận" />
+                                    </TextBlock>
+
+                                    <StackPanel
+                                        Grid.Column="0"
+                                        Margin="0,10,10,15"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        Orientation="Horizontal">
+                                        <Grid Width="120" Margin="0,0,15,0">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+
+                                            <TextBlock
+                                                Grid.Row="0"
+                                                Style="{StaticResource FieldSmallLabelTextBlockStyle}"
+                                                Text="Tháng" />
+                                            <ComboBox
+                                                Grid.Row="1"
+                                                Height="25"
+                                                Margin="0"
+                                                ItemsSource="{Binding MonthOptions}"
+                                                SelectedItem="{Binding PieChartMonth}"
+                                                Style="{StaticResource SmallComboBoxStyle}" />
+                                        </Grid>
+
+                                        <Grid Width="130">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+
+                                            <TextBlock
+                                                Grid.Row="0"
+                                                Style="{StaticResource FieldSmallLabelTextBlockStyle}"
+                                                Text="Năm" />
+                                            <ComboBox
+                                                Grid.Row="1"
+                                                Height="25"
+                                                Margin="0"
+                                                ItemsSource="{Binding YearOptions}"
+                                                SelectedItem="{Binding PieChartYear, Mode=TwoWay}"
+                                                Style="{StaticResource SmallComboBoxStyle}" />
+                                        </Grid>
+                                    </StackPanel>
+
+                                    <Button
+                                        Grid.Column="1"
+                                        Click="HideBorderButton_Click"
+                                        Style="{StaticResource CloseWidgetButtonStyle}" />
+                                </Grid>
+
+                                <lvc:PieChart
+                                    Grid.Row="1"
+                                    Margin="10"
+                                    DataTooltip="{Binding QuanDaiLyTooltip}"
+                                    FontFamily="Nunito"
+                                    FontSize="18"
+                                    Hoverable="True"
+                                    InnerRadius="0"
+                                    LegendLocation="Right"
+                                    Series="{Binding QuanDaiLySeries}">
+                                    <lvc:PieChart.ChartLegend>
+                                        <lvc:DefaultLegend FontFamily="Nunito" FontSize="18" />
+                                    </lvc:PieChart.ChartLegend>
+                                </lvc:PieChart>
+                            </Grid>
+                        </Border>
+                    </WrapPanel>
+                </ScrollViewer>
+            </Border>
+
+        </Grid>
+    </Border>
+</Page>

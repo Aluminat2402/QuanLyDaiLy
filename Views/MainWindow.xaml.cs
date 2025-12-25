@@ -77,11 +77,11 @@ namespace QuanLyDaiLy.Views
 
             switch (pageName)
             {
-                //case "Dashboard":
-                //    var dashboardPage = _serviceProvider.GetRequiredService<DashboardViews.DashboardPage>();
-                //    MainContent.Navigate(dashboardPage);
-                //    StackPanelTabButton.Visibility = Visibility.Hidden;
-                //    break;
+                case "Dashboard":
+                    var dashboardPage = _serviceProvider.GetRequiredService<DashboardViews.DashboardPage>();
+                    MainContent.Navigate(dashboardPage);
+                    StackPanelTabButton.Visibility = Visibility.Hidden;
+                    break;
                 case "DanhSach":
                     MainContent.Content = null;
                     StackPanelTabButton.Visibility = Visibility.Visible;
@@ -118,6 +118,16 @@ namespace QuanLyDaiLy.Views
                 case "PhieuThu":
                     var phieuThuPage = _serviceProvider.GetRequiredService<PhieuThuViews.PhieuThuPage>();
                     MainContent.Navigate(phieuThuPage);
+                    break;
+                case "ThamSo":
+                    var thamSoPage = _serviceProvider.GetRequiredService<ThamSoViews.ThamSoPage>();
+                    MainContent.Navigate(thamSoPage);
+                    StackPanelTabButton.Visibility = Visibility.Hidden;
+                    break;
+                case "BaoCao":
+                    var baoCaoPage = _serviceProvider.GetRequiredService<BaoCaoViews.BaoCaoChiTietPage>();
+                    MainContent.Navigate(baoCaoPage);
+                    StackPanelTabButton.Visibility = Visibility.Hidden;
                     break;
                 default:
                     break;
